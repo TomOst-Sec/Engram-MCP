@@ -1,9 +1,15 @@
 {
   "permissions": {
-    "allow": ["Read", "Write", "Edit", "Bash", "Agent", "Glob", "Grep"]
-  },
-  "env": {
-    "COLONY_ROLE": "genesis",
-    "COLONY_TASK_DIR": "_colony/tasks/genesis"
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "Bash",
+      "Agent",
+      "Glob",
+      "Grep",
+      "WebSearch",
+      "WebFetch"
+    ]
   }
 }
