@@ -1,0 +1,12 @@
+node_modules/
+.worktrees/
+*.log
+.env
+.env.local
+dist/
+build/
+coverage/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
