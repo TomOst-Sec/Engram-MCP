@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M1: MVP
 **Dependencies:** TASK-005
-**Status:** active
+**Status:** queued
 **Created:** 2026-03-15
 **Author:** atlas
 
