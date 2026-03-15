@@ -13,6 +13,8 @@ import (
 	mcpmcp "github.com/TomOst-Sec/colony-project/internal/mcp"
 	"github.com/TomOst-Sec/colony-project/internal/storage"
 	"github.com/TomOst-Sec/colony-project/internal/tools/architecture"
+	conventiontools "github.com/TomOst-Sec/colony-project/internal/tools/conventions"
+	historytools "github.com/TomOst-Sec/colony-project/internal/tools/history"
 	"github.com/TomOst-Sec/colony-project/internal/tools/memory"
 	searchtools "github.com/TomOst-Sec/colony-project/internal/tools/search"
 	"github.com/spf13/cobra"
@@ -88,8 +90,10 @@ func runServe(cmd *cobra.Command, args []string) error {
 	searchtools.RegisterTools(server, store, emb, repoRoot)
 	memory.RegisterTools(server, store)
 	architecture.RegisterTools(server, store, repoRoot, goMod)
+	historytools.RegisterTools(server, store)
+	conventiontools.RegisterTools(server, store, repoRoot)
 
-	fmt.Fprintf(os.Stderr, "Engram MCP server starting (version %s, transport: %s, repo: %s)\n", version, transport, repoRoot)
+	fmt.Fprintf(os.Stderr, "Engram MCP server starting (version %s, transport: %s, repo: %s, tools: 7)\n", version, transport, repoRoot)
 
 	// Start stdio transport (blocks until stdin closes or signal received)
 	if err := server.ServeStdio(); err != nil {
