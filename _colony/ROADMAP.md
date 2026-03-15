@@ -1,93 +1,69 @@
 # Colony Roadmap
 
 > Maintained by ATLAS. Updated every 30-minute cycle.
-> Last updated: 2026-03-15 17:00
+> Last updated: 2026-03-15 17:30
 
 ## Current Milestone
-**Milestone 2: Core Features** — "Every developer needs this"
-(Milestone 1 MVP complete — all 17 M1 tasks done and merged)
+**Milestone 2: Core Features** — nearly complete (10/12 done)
+**Milestone 3: Polish & Growth** — starting (first batch generated)
 
 ## Milestone Status
 
 | Milestone | Status | Progress | Tasks Total | Done | In Progress | Queued |
 |-----------|--------|----------|-------------|------|-------------|--------|
 | M1: MVP | **COMPLETE** | 100% | 17 | 17 | 0 | 0 |
-| M2: Core Features | In Progress | 17% | 12 | 2 | 5 | 5 |
-| M3: Polish & Growth | Not Started | 0% | 0 | 0 | 0 | 0 |
+| M2: Core Features | Nearly Complete | 83% | 12 | 10 | 1 | 1 |
+| M3: Polish & Growth | Starting | 0% | 4 | 0 | 0 | 4 |
 | M4: Ecosystem | Not Started | 0% | 0 | 0 | 0 | 0 |
 
-## M1: MVP — COMPLETE
+## All Tasks
 
-All 17 tasks done and merged (TASK-001 through TASK-017). Engram has:
-- MCP Server (stdio transport, JSON-RPC 2.0)
-- 8 language parsers (Go, Python, TypeScript, JavaScript, Rust, Java, C#, Ruby, PHP)
-- ONNX embedding pipeline with vector similarity
-- 5 MCP tools (search_code, remember, recall, get_architecture, engram_status)
-- CLI: serve, index, search, recall, status
-- SQLite storage with FTS5 + WAL mode
-- README + Claude Code + Cursor integration guides
+| Task | Title | Milestone | Assigned | Status |
+|------|-------|-----------|----------|--------|
+| 001-017 | M1 MVP tasks | M1 | mixed | done |
+| TASK-018 | Git History Analyzer | M2 | alpha | done |
+| TASK-019 | `get_conventions` MCP Tool | M2 | bravo | done |
+| TASK-020 | `get_history` MCP Tool | M2 | alpha | done |
+| TASK-021 | Ruby + PHP Grammars | M2 | bravo | done |
+| TASK-022 | Wire M2 Tools + BUG-016 Fix | M2 | alpha | done |
+| TASK-023 | Incremental Re-Indexing / --watch | M2 | alpha | active |
+| TASK-024 | Convention Enforcement Prompts | M2 | alpha | done |
+| TASK-025 | `engram index` Git+Convention Integration | M2 | alpha | review |
+| TASK-026 | Swift + Kotlin Grammars | M2 | bravo | done |
+| TASK-027 | C + C++ Grammars | M2 | bravo | done |
+| TASK-028 | Lua + Zig Grammars | M2 | bravo | done |
+| TASK-029 | Integration Guides — Codex, Windsurf, Copilot | M2 | bravo | done |
+| TASK-030 | `npx engram init` Bootstrap | M2 | bravo | queued |
+| TASK-031 | CLI Lipgloss Styling | M2 | alpha | queued |
+| TASK-032 | HTTP/SSE Transport | M3 | alpha | queued |
+| TASK-033 | TUI Dashboard Foundation | M3 | alpha | queued |
+| TASK-034 | Ollama Integration | M3 | bravo | queued |
+| TASK-035 | Multi-Repo Support | M3 | alpha | queued |
 
-## M2: Core Features — Task Summary
+## M2 Remaining
+- TASK-023: --watch mode (alpha, active)
+- TASK-025: index integration (alpha, in review)
+- TASK-030: npx engram init (bravo, queued) — NEW
+- TASK-031: CLI lipgloss styling (alpha, queued) — NEW
 
-| Task | Title | Assigned | Status | Dependencies |
-|------|-------|----------|--------|--------------|
-| TASK-018 | Git History Analyzer | alpha | done | ✅ |
-| TASK-019 | `get_conventions` MCP Tool | bravo | active | ✅ |
-| TASK-020 | `get_history` MCP Tool | alpha | done | ✅ |
-| TASK-021 | Ruby + PHP Grammars | bravo | done | ✅ |
-| TASK-022 | Wire M2 Tools + BUG-016 Fix | alpha | queued | blocked on 019 |
-| TASK-023 | Incremental Re-Indexing / --watch | alpha | active | ✅ |
-| TASK-024 | Convention Enforcement Prompts | alpha | queued | blocked on 019 |
-| TASK-025 | `engram index` Git+Convention Integration | alpha | active | ✅ |
-| TASK-026 | Swift + Kotlin Grammars | bravo | active | ✅ |
-| TASK-027 | C + C++ Grammars | bravo | active | ✅ |
-| TASK-028 | Lua + Zig Grammars | bravo | queued | ✅ |
-| TASK-029 | Integration Guides — Codex, Windsurf, Copilot | bravo | queued | ✅ |
+## M3 First Batch (all queued, deps met)
+- TASK-032: HTTP/SSE transport (alpha) — remote/team MCP server
+- TASK-033: TUI dashboard (alpha) — bubbletea interactive browser
+- TASK-034: Ollama integration (bravo) — alternative embedding backend
+- TASK-035: Multi-repo support (alpha) — cross-repo search
 
-## Queue Readiness
-
-### Ready NOW:
-- TASK-028: Lua + Zig parsers (bravo)
-- TASK-029: Integration guides (bravo)
-
-### Blocked on TASK-019 (get_conventions):
-- TASK-022: Wire M2 tools into serve
-- TASK-024: Convention enforcement prompts
-
-## M2 Dependency Graph
-
-```
-TASK-018 (done) ──→ TASK-020 (done) ──┐
-                                       ├──→ TASK-022 (queued) — wire M2 tools
-TASK-019 (active) ────────────────────┤
-                                       └──→ TASK-024 (queued) — convention prompts
-
-TASK-013 (done) ──→ TASK-023 (active) — --watch mode
-TASK-013+018 (done) ──→ TASK-025 (active) — index integration
-
-TASK-005 (done) ──→ TASK-021 (done) — Ruby + PHP
-                ──→ TASK-026 (active) — Swift + Kotlin
-                ──→ TASK-027 (active) — C + C++
-                ──→ TASK-028 (queued) — Lua + Zig
-
-No deps ──→ TASK-029 (queued) — integration guides
-```
-
-## Team Allocation (M2)
-
-| Team | M2 Done | M2 Active | M2 Queued | Total |
-|------|---------|-----------|-----------|-------|
-| Alpha (3) | 2 | 2 (023, 025) | 2 (022, 024) | 6 (50%) |
-| Bravo (2) | 1 | 3 (019, 026, 027) | 2 (028, 029) | 6 (50%) |
-
-## M2 Not Yet Tasked
-- `npx engram init` Bootstrap (Feature 12)
-- CLI lipgloss styling (Feature 13)
+## M3 Not Yet Tasked
+- Community Convention Modules (Feature 19)
+- Homebrew tap, AUR, Scoop, .deb/.rpm packages
+- Docker image for CI/CD
+- Benchmark suite
 
 ## Bugs
-- BUG-016: C# parser not registered — fix bundled into TASK-022
+- BUG-016: RESOLVED (fixed in TASK-022, bug file deleted)
 
 ## Velocity
-- Session 1 (M1): 17 tasks in ~60 min
-- Session 2 (M2): 8 tasks done in 30 min (6 M1 + 2 M2), 5 more active
-- Colony is performing exceptionally
+- Session 1: 17 tasks in ~60 min (M1 complete)
+- Session 2: 8 tasks in ~30 min (M2 started)
+- Session 3: 10 tasks in ~30 min (M2 nearly complete)
+- Total: 29 tasks done, 1 active, 1 review, 6 queued = 37 total tasks generated
+- Colony running at exceptional velocity — ~3 min/task average
