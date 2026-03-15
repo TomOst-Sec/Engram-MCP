@@ -48,6 +48,8 @@ func NewDefaultRegistry() *Registry {
 	r.Register(NewJavaScriptParser())
 	r.Register(NewRustParser())
 	r.Register(NewJavaParser())
+	r.Register(NewSwiftParser())
+	r.Register(NewKotlinParser())
 	return r
 }
 
