@@ -1,4 +1,4 @@
-.PHONY: build test lint clean run bench
+.PHONY: build test lint clean run bench release-dry release
 
 export CGO_CFLAGS := -DSQLITE_ENABLE_FTS5
 export CGO_LDFLAGS := -lm
@@ -20,3 +20,9 @@ run:
 
 bench:
 	go test -bench=. -benchmem -timeout 300s ./benchmarks/...
+
+release-dry:
+	goreleaser release --snapshot --clean --skip=publish
+
+release:
+	goreleaser release --clean

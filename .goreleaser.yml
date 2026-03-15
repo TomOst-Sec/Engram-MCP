@@ -1,0 +1,59 @@
+version: 2
+project_name: engram
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - main: ./cmd/engram
+    binary: engram
+    env:
+      - CGO_ENABLED=1
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    flags:
+      - -tags=sqlite_fts5
+    ldflags:
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}}
+
+archives:
+  - format: tar.gz
+    name_template: "engram-{{ .Os }}-{{ .Arch }}"
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^atlas:"
+      - "^audit:"
+      - "^ceo:"
+
+nfpms:
+  - id: engram
+    package_name: engram
+    vendor: TomOst-Sec
+    homepage: https://github.com/TomOst-Sec/colony-project
+    description: "Persistent memory MCP server for AI coding agents"
+    license: MIT
+    formats:
+      - deb
+      - rpm
+
+brews:
+  - repository:
+      owner: TomOst-Sec
+      name: homebrew-tap
+    homepage: https://github.com/TomOst-Sec/colony-project
+    description: "Persistent memory MCP server for AI coding agents"
+    license: MIT
+
+# TODO: Add AUR package config
+# TODO: Add Scoop bucket config
