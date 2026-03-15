@@ -15,6 +15,7 @@ These rules are non-negotiable. Every agent must follow them in every cycle.
    - ATLAS: only writes to `_colony/` (tasks, roadmap, goals processing). Reads CEO directives.
    - ALPHA/BRAVO instances: only write to `src/`, `tests/`, `docs/`, and move their own tasks in `_colony/`
    - AUDIT: only merges branches and writes to `_colony/` (done, bugs, reports)
+   - BETA-TESTER: only reads code and writes to `_colony/` (reports, bugs, queue for bug tasks, logs)
 
 4. **Use the scripts:** Always use `_colony/scripts/claim-task.sh` and `_colony/scripts/complete-task.sh` for task state transitions. Pass your instance name (e.g., `alpha-2`, `bravo-1`). Do not manually `mv` and `git add`.
 
