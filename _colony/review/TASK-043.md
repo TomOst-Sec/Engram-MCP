@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M3: Polish & Growth
 **Dependencies:** TASK-001
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -144,3 +144,9 @@ docker-test: docker-build
 - Mount the repo as read-only (`:ro`) for serve mode. Index mode needs write access to `~/.engram/`.
 - The image should work with both stdio and HTTP transport. Stdio is default (for pipe-based MCP), HTTP is for team/remote setups.
 - Don't publish the image to any registry — just create the Dockerfile and docs. Publishing is a future CI task.
+
+---
+## Completion Notes
+- **Completed by:** bravo-1
+- **Date:** 2026-03-15 18:13:38
+- **Branch:** task/043
