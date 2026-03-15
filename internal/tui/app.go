@@ -19,8 +19,10 @@ type App struct {
 	tabs      []string
 	activeTab int
 
-	statusPanel   StatusModel
-	memoriesPanel MemoriesModel
+	statusPanel       StatusModel
+	memoriesPanel     MemoriesModel
+	conventionsPanel  ConventionsModel
+	architecturePanel ArchitectureModel
 
 	width, height int
 }
@@ -28,11 +30,13 @@ type App struct {
 // NewApp creates a new TUI app.
 func NewApp(store *storage.Store, repoRoot string) App {
 	return App{
-		store:         store,
-		repoRoot:      repoRoot,
-		tabs:          tabNames,
-		statusPanel:   NewStatusModel(store, repoRoot),
-		memoriesPanel: NewMemoriesModel(store),
+		store:             store,
+		repoRoot:          repoRoot,
+		tabs:              tabNames,
+		statusPanel:       NewStatusModel(store, repoRoot),
+		memoriesPanel:     NewMemoriesModel(store),
+		conventionsPanel:  NewConventionsModel(store),
+		architecturePanel: NewArchitectureModel(store),
 	}
 }
 
@@ -51,6 +55,8 @@ func (a App) Init() tea.Cmd {
 	return tea.Batch(
 		a.statusPanel.Init(),
 		a.memoriesPanel.Init(),
+		a.conventionsPanel.Init(),
+		a.architecturePanel.Init(),
 	)
 }
 
@@ -94,6 +100,10 @@ func (a App) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		a.statusPanel, cmd = a.statusPanel.Update(msg)
 	case 1:
 		a.memoriesPanel, cmd = a.memoriesPanel.Update(msg)
+	case 2:
+		a.conventionsPanel, cmd = a.conventionsPanel.Update(msg)
+	case 3:
+		a.architecturePanel, cmd = a.architecturePanel.Update(msg)
 	}
 
 	return a, cmd
@@ -121,9 +131,9 @@ func (a App) View() string {
 	case 1:
 		b.WriteString(a.memoriesPanel.View())
 	case 2:
-		b.WriteString(panelStyle.Render(labelStyle.Render("Conventions panel — coming soon")))
+		b.WriteString(a.conventionsPanel.View())
 	case 3:
-		b.WriteString(panelStyle.Render(labelStyle.Render("Architecture panel — coming soon")))
+		b.WriteString(a.architecturePanel.View())
 	}
 
 	b.WriteString("\n")
