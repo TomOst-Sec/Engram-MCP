@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M2: Core Features
 **Dependencies:** TASK-005
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -126,3 +126,9 @@ Register both parsers in the registry where existing parsers are registered.
 - Ruby uses `#` for single-line comments. Collect consecutive `#` lines above a symbol as the docstring.
 - PHP files must start with `<?php` for tree-sitter to parse them. Include this in the test fixture.
 - Do NOT modify any existing parser files beyond adding registration entries.
+
+---
+## Completion Notes
+- **Completed by:** bravo-1
+- **Date:** 2026-03-15 16:43:53
+- **Branch:** task/021
