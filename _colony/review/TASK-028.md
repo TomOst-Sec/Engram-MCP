@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M2: Core Features
 **Dependencies:** TASK-005
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -90,3 +90,9 @@ Register both parsers in `NewDefaultRegistry()`.
 - Lua has no formal class system. The `local ClassName = {}` pattern followed by `function ClassName:method()` is idiomatic. Detect this pattern heuristically.
 - Zig's `test "name" { }` blocks are string-named, not function-named. Use the test description as the symbol name.
 - With these two languages, Engram reaches 15 total: Go, Python, TypeScript, JavaScript, Rust, Java, C#, Ruby, PHP, Swift, Kotlin, C, C++, Lua, Zig.
+
+---
+## Completion Notes
+- **Completed by:** bravo-1
+- **Date:** 2026-03-15 16:54:01
+- **Branch:** task/028
