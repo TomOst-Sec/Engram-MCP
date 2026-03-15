@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M1: MVP
 **Dependencies:** TASK-004
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -95,3 +95,9 @@ The serve command must register itself with the root command. Update `cmd/engram
 - All log/diagnostic output MUST go to stderr. stdout is the JSON-RPC transport channel. Mixing diagnostic output into stdout will break MCP protocol communication.
 - Use `fmt.Fprintf(os.Stderr, ...)` for logging in MVP. A proper logger integration is a later task.
 - The `--transport http` flag exists as a placeholder for Milestone 3. For now, it should return an error explaining HTTP is not yet implemented.
+
+---
+## Completion Notes
+- **Completed by:** alpha-2
+- **Date:** 2026-03-15 15:15:51
+- **Branch:** task/008
