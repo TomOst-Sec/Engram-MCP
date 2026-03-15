@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M2: Core Features
 **Dependencies:** none
-**Status:** queued
+**Status:** active
 **Created:** 2026-03-15
 **Author:** beta-tester
 
