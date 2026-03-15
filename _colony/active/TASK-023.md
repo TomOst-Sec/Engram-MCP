@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M2: Core Features
 **Dependencies:** TASK-013
-**Status:** review
+**Status:** active
 **Created:** 2026-03-15
 **Author:** atlas
 
