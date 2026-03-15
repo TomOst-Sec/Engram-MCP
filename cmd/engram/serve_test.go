@@ -44,16 +44,21 @@ func TestServeInvalidTransport(t *testing.T) {
 	assert.Contains(t, err.Error(), "unknown transport")
 }
 
-func TestServeHTTPTransportNotImplemented(t *testing.T) {
+func TestServeHTTPTransportAccepted(t *testing.T) {
+	// Verify HTTP transport is accepted as a valid transport value
+	// (we can't actually start the server in a test since it blocks)
 	root := newRootCmd()
 	buf := new(bytes.Buffer)
 	root.SetOut(buf)
 	root.SetErr(buf)
-	root.SetArgs([]string{"serve", "--transport", "http"})
+	root.SetArgs([]string{"serve", "--help"})
 
 	err := root.Execute()
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "not yet implemented")
+	assert.NoError(t, err)
+	output := buf.String()
+	assert.Contains(t, output, "http-addr")
+	assert.Contains(t, output, "http-token")
+	assert.Contains(t, output, "cors-origin")
 }
 
 func TestServeInvalidLogLevel(t *testing.T) {

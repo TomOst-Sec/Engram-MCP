@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"crypto/sha256"
-	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -21,8 +20,11 @@ import (
 )
 
 var (
-	transport string
-	logLevel  string
+	transport  string
+	logLevel   string
+	httpAddr   string
+	httpToken  string
+	corsOrigin string
 )
 
 func newServeCmd() *cobra.Command {
@@ -34,6 +36,9 @@ func newServeCmd() *cobra.Command {
 	}
 	cmd.Flags().StringVar(&transport, "transport", "stdio", "Transport type: stdio (default) or http")
 	cmd.Flags().StringVar(&logLevel, "log-level", "info", "Log level: debug, info, warn, error")
+	cmd.Flags().StringVar(&httpAddr, "http-addr", ":3333", "HTTP server address (when --transport=http)")
+	cmd.Flags().StringVar(&httpToken, "http-token", "", "Bearer token for HTTP auth (optional)")
+	cmd.Flags().StringVar(&corsOrigin, "cors-origin", "*", "CORS allowed origin")
 	return cmd
 }
 
@@ -43,8 +48,7 @@ func runServe(cmd *cobra.Command, args []string) error {
 	case "stdio":
 		// ok
 	case "http":
-		fmt.Fprintln(os.Stderr, "HTTP transport not yet implemented")
-		return errors.New("HTTP transport not yet implemented")
+		// ok
 	default:
 		return fmt.Errorf("unknown transport %q: must be stdio or http", transport)
 	}
@@ -95,11 +99,25 @@ func runServe(cmd *cobra.Command, args []string) error {
 
 	fmt.Fprintf(os.Stderr, "Engram MCP server starting (version %s, transport: %s, repo: %s, tools: 7)\n", version, transport, repoRoot)
 
-	// Start stdio transport (blocks until stdin closes or signal received)
-	if err := server.ServeStdio(); err != nil {
-		fmt.Fprintln(os.Stderr, "Shutting down...")
-		server.Shutdown()
-		return err
+	switch transport {
+	case "http":
+		fmt.Fprintf(os.Stderr, "Listening on %s\n", httpAddr)
+		cfg := mcpmcp.HTTPConfig{
+			Addr:       httpAddr,
+			Token:      httpToken,
+			CORSOrigin: corsOrigin,
+		}
+		if err := server.ServeHTTP(cfg); err != nil {
+			fmt.Fprintln(os.Stderr, "Shutting down...")
+			return err
+		}
+	default:
+		// stdio transport (blocks until stdin closes or signal received)
+		if err := server.ServeStdio(); err != nil {
+			fmt.Fprintln(os.Stderr, "Shutting down...")
+			server.Shutdown()
+			return err
+		}
 	}
 
 	fmt.Fprintln(os.Stderr, "Shutting down...")
