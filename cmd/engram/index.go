@@ -6,7 +6,9 @@ import (
 	"os"
 
 	"github.com/TomOst-Sec/colony-project/internal/config"
+	"github.com/TomOst-Sec/colony-project/internal/conventions"
 	"github.com/TomOst-Sec/colony-project/internal/embeddings"
+	"github.com/TomOst-Sec/colony-project/internal/git"
 	"github.com/TomOst-Sec/colony-project/internal/indexer"
 	"github.com/TomOst-Sec/colony-project/internal/parser"
 	"github.com/TomOst-Sec/colony-project/internal/storage"
@@ -70,7 +72,29 @@ func runIndex(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("indexing failed: %w", err)
 	}
 
-	// 7. Print summary
+	// 7. Analyze git history
+	ctx := context.Background()
+	fmt.Fprintln(os.Stderr, "Analyzing git history...")
+	gitAnalyzer := git.New(store, repoRoot)
+	historyStats, historyErr := gitAnalyzer.AnalyzeAll(ctx)
+	if historyErr != nil {
+		fmt.Fprintf(os.Stderr, "Warning: git history analysis failed: %v\n", historyErr)
+	} else {
+		fmt.Fprintf(os.Stderr, "Git history: %d files analyzed, hottest: %s (%d changes)\n",
+			historyStats.FilesAnalyzed, historyStats.HottestFile, historyStats.HottestFrequency)
+	}
+
+	// 8. Analyze conventions
+	fmt.Fprintln(os.Stderr, "Detecting conventions...")
+	convAnalyzer := conventions.New(store, repoRoot)
+	convResult, convErr := convAnalyzer.Analyze(ctx)
+	if convErr != nil {
+		fmt.Fprintf(os.Stderr, "Warning: convention analysis failed: %v\n", convErr)
+	} else {
+		fmt.Fprintf(os.Stderr, "Conventions: %d patterns detected\n", len(convResult.Conventions))
+	}
+
+	// 9. Print summary
 	fmt.Fprintf(os.Stderr, "\nIndex complete:\n")
 	fmt.Fprintf(os.Stderr, "  Files processed:     %d\n", stats.FilesProcessed)
 	fmt.Fprintf(os.Stderr, "  Files skipped:       %d\n", stats.FilesSkipped)
@@ -79,6 +103,12 @@ func runIndex(cmd *cobra.Command, args []string) error {
 		fmt.Fprintf(os.Stderr, "  Embeddings:          %d\n", stats.EmbeddingsGenerated)
 	} else {
 		fmt.Fprintf(os.Stderr, "  Embeddings:          unavailable — install ONNX model for semantic search\n")
+	}
+	if historyErr == nil {
+		fmt.Fprintf(os.Stderr, "  Git history:         %d files analyzed\n", historyStats.FilesAnalyzed)
+	}
+	if convErr == nil {
+		fmt.Fprintf(os.Stderr, "  Conventions:         %d patterns detected\n", len(convResult.Conventions))
 	}
 	fmt.Fprintf(os.Stderr, "  Duration:            %s\n", stats.Duration.Round(100*1e6))
 	fmt.Fprintf(os.Stderr, "  Database:            %s\n", cfg.DatabasePath)
