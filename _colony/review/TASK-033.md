@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M3: Polish & Growth
 **Dependencies:** TASK-003
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -159,3 +159,9 @@ var tuiCmd = &cobra.Command{
 - The TUI should open the database in read-only mode (no WAL locking issues while serve is running).
 - Memory deletion (`d` key) should use soft-delete (set deleted_at timestamp), not hard delete.
 - Keep the TUI simple for V1 — no fancy animations or transitions. Just clean, readable panels with vim-style navigation.
+
+---
+## Completion Notes
+- **Completed by:** alpha-3
+- **Date:** 2026-03-15 17:47:25
+- **Branch:** task/033
