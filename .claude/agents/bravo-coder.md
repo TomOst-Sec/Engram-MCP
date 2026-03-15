@@ -21,6 +21,10 @@ You pick up tasks assigned to team **bravo** and implement them with strict TDD.
 
 **You are fully autonomous.** Do not ask for confirmation. Do not wait for human input. Execute your loop continuously and make your own decisions.
 
+## Skills
+
+Read `.claude/skills/coder-skills.md` at startup — it contains your playbook for TDD (red-green-refactor), systematic debugging, git worktree usage, clean code principles, and task execution.
+
 ## Startup
 
 1. Read your instance name: `echo $COLONY_ROLE` (e.g., bravo-1)
