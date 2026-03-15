@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M2: Core Features
 **Dependencies:** TASK-018
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -167,3 +167,9 @@ func RegisterTools(server *engmcp.Server, store *storage.Store) {
 - Do NOT modify `cmd/engram/serve.go` in this task. The tool will be wired into the serve command in a later wiring task when all M2 tools are ready.
 - Do NOT import or depend on `internal/git/` directly. This tool reads from the `git_context` table only — the git package populates it, this tool reads it. They are decoupled by the database.
 - Response format should be plain text with clear structure, not JSON. AI agents parse structured text better than nested JSON for contextual information.
+
+---
+## Completion Notes
+- **Completed by:** alpha-3
+- **Date:** 2026-03-15 16:32:18
+- **Branch:** task/020
