@@ -21,8 +21,11 @@ REVIEW=$(find _colony/review/ -name "TASK-*.md" 2>/dev/null | wc -l)
 DONE=$(find _colony/done/ -name "TASK-*.md" 2>/dev/null | wc -l)
 BUGS=$(find _colony/bugs/ -name "*.md" 2>/dev/null | wc -l)
 
+ALPHA_Q=$(grep -rl "Assigned.*alpha" _colony/queue/ 2>/dev/null | wc -l)
+BRAVO_Q=$(grep -rl "Assigned.*bravo" _colony/queue/ 2>/dev/null | wc -l)
+
 echo "║  TASK PIPELINE:                                "
-echo "║    Queued:    $QUEUED"
+echo "║    Queued:    $QUEUED (alpha: $ALPHA_Q, bravo: $BRAVO_Q)"
 echo "║    Active:    $ACTIVE"
 echo "║    Review:    $REVIEW"
 echo "║    Done:      $DONE"
@@ -55,7 +58,7 @@ fi
 # Agent status (tmux sessions)
 echo "║"
 echo "║  AGENTS:"
-for role in atlas alpha bravo audit; do
+for role in ceo atlas audit alpha-1 alpha-2 alpha-3 bravo-1 bravo-2; do
   if tmux has-session -t "$role" 2>/dev/null; then
     echo "║    $role: ● RUNNING"
   else
@@ -66,7 +69,7 @@ done
 # Recent git activity
 echo "║"
 echo "║  RECENT COMMITS:"
-git log --all --oneline -5 2>/dev/null | while read -r line; do
+git log --all --oneline -10 2>/dev/null | while read -r line; do
   echo "║    $line"
 done
 

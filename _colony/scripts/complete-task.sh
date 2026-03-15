@@ -1,11 +1,11 @@
 #!/bin/bash
 # Complete a task — move from active/ to review/ and commit
-# Usage: ./complete-task.sh TASK-NNN.md <role>
+# Usage: ./complete-task.sh TASK-NNN.md <instance-name>
 
 set -euo pipefail
 
-TASK="${1:?Usage: ./complete-task.sh TASK-NNN.md <role>}"
-ROLE="${2:?Usage: ./complete-task.sh TASK-NNN.md <role>}"
+TASK="${1:?Usage: ./complete-task.sh TASK-NNN.md <instance-name>}"
+INSTANCE="${2:?Usage: ./complete-task.sh TASK-NNN.md <instance-name>}"
 
 cd "$(git rev-parse --show-toplevel)"
 
@@ -22,7 +22,7 @@ fi
 mv "_colony/active/$TASK" "_colony/review/$TASK"
 
 # Update status in task file
-sed -i "s/^\\*\\*Status:\\*\\*.*/\\*\\*Status:\\*\\* review/" "_colony/review/$TASK"
+sed -i "s/^\*\*Status:\*\*.*/\*\*Status:\*\* review/" "_colony/review/$TASK"
 
 # Append completion notes
 TASK_NUM=$(echo "$TASK" | grep -oP '\d+')
@@ -30,14 +30,14 @@ cat >> "_colony/review/$TASK" << EOF
 
 ---
 ## Completion Notes
-- **Completed by:** $ROLE
+- **Completed by:** $INSTANCE
 - **Date:** $(date '+%Y-%m-%d %H:%M:%S')
 - **Branch:** task/$TASK_NUM
 EOF
 
 # Commit and push
 git add "_colony/active/$TASK" "_colony/review/$TASK"
-git commit -m "$ROLE: completed $TASK — moved to review"
+git commit -m "$INSTANCE: completed $TASK — moved to review"
 git push origin main
 
-echo "OK: $TASK moved to review/"
+echo "OK: $TASK moved to review/ (completed by $INSTANCE)"
