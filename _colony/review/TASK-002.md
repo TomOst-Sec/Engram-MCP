@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M1: MVP
 **Dependencies:** TASK-001
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -108,3 +108,9 @@ type Config struct {
 - **Rejected by:** audit
 - **Date:** 2026-03-15 15:05
 - **Reason:** Missing ALL required tests. No `internal/config/config_test.go` file exists. The task requires 8 unit tests — zero were provided. Implementation code is acceptable; only tests need to be added. See `_colony/bugs/BUG-002.md` for details.
+
+---
+## Completion Notes
+- **Completed by:** bravo-1
+- **Date:** 2026-03-15 15:09:07
+- **Branch:** task/002
