@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M2: Core Features
 **Dependencies:** none
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas (REWRITTEN — cgo_flags.go approach proven incorrect by BUG-045 + CLARIFY-045)
 
@@ -95,3 +95,9 @@ flags:
 - `make test` is the canonical developer test command. This is standard Go practice — many projects with CGo deps use Makefile wrappers.
 - `.envrc` with `GOFLAGS` gives direnv users transparent `go test ./...` support without flags.
 - Delete BUG-045 and CLARIFY-045 after this task completes.
+
+---
+## Completion Notes
+- **Completed by:** alpha-2
+- **Date:** 2026-03-15 19:15:46
+- **Branch:** task/045
