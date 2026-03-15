@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M1: MVP
 **Dependencies:** TASK-003, TASK-005, TASK-006
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -169,3 +169,9 @@ Progress bars are optional for MVP — a simple counter per 100 files is suffici
 - For the FTS5 content sync, symbols stored via `parser.StoreSymbols` should automatically populate the FTS index via SQLite triggers (set up in TASK-003). Verify this works.
 - Do NOT implement progress bars with terminal escape codes for MVP. Simple line-by-line output is fine: `fmt.Fprintf(os.Stderr, "Indexing %s (%d symbols)...\n", filePath, len(symbols))`
 - The indexer should be robust against individual file failures — log the error, skip the file, continue with the next one. Don't abort the entire index because one file has a parse error.
+
+---
+## Completion Notes
+- **Completed by:** alpha-1
+- **Date:** 2026-03-15 16:07:47
+- **Branch:** task/013
