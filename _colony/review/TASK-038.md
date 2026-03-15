@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M2: Core Features
 **Dependencies:** TASK-003
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -106,3 +106,9 @@ var importCmd = &cobra.Command{
 - For the code_index table, exclude the `embedding` BLOB column from JSON export (it's binary data). Include a `has_embedding: true/false` field instead.
 - Export should handle large databases without loading everything into memory. Use `sql.Rows` iteration and `json.Encoder` streaming.
 - Import should use transactions — wrap all inserts in a single transaction for performance.
+
+---
+## Completion Notes
+- **Completed by:** bravo-1
+- **Date:** 2026-03-15 18:02:56
+- **Branch:** task/038
