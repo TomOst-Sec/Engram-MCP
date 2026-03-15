@@ -2,6 +2,8 @@ package main
 
 import (
 	"bytes"
+	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -68,4 +70,56 @@ func TestServeInvalidLogLevel(t *testing.T) {
 
 func TestVersionIsNonEmpty(t *testing.T) {
 	assert.NotEmpty(t, version)
+}
+
+func TestDetectRepoRoot(t *testing.T) {
+	root, err := detectRepoRoot()
+	require.NoError(t, err)
+	assert.NotEmpty(t, root)
+
+	gitDir := filepath.Join(root, ".git")
+	info, err := os.Stat(gitDir)
+	require.NoError(t, err)
+	assert.True(t, info.IsDir())
+}
+
+func TestDetectRepoRootFromNonGitDir(t *testing.T) {
+	origDir, err := os.Getwd()
+	require.NoError(t, err)
+	defer os.Chdir(origDir)
+
+	tmpDir := t.TempDir()
+	err = os.Chdir(tmpDir)
+	require.NoError(t, err)
+
+	_, err = detectRepoRoot()
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "no .git directory found")
+}
+
+func TestGoModulePath(t *testing.T) {
+	tmpDir := t.TempDir()
+	err := os.WriteFile(filepath.Join(tmpDir, "go.mod"), []byte("module github.com/example/project\n\ngo 1.21\n"), 0644)
+	require.NoError(t, err)
+
+	modPath := goModulePath(tmpDir)
+	assert.Equal(t, "github.com/example/project", modPath)
+}
+
+func TestGoModulePathNoGoMod(t *testing.T) {
+	tmpDir := t.TempDir()
+	modPath := goModulePath(tmpDir)
+	assert.Equal(t, "", modPath)
+}
+
+func TestDatabaseDir(t *testing.T) {
+	dir := databaseDir("/some/repo/path")
+	assert.NotEmpty(t, dir)
+	assert.Contains(t, dir, ".engram")
+
+	dir2 := databaseDir("/some/repo/path")
+	assert.Equal(t, dir, dir2)
+
+	dir3 := databaseDir("/other/repo")
+	assert.NotEqual(t, dir, dir3)
 }
