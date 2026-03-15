@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M2: Core Features
 **Dependencies:** TASK-005
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -96,3 +96,9 @@ Add both parsers to `NewDefaultRegistry()` in `registry.go`.
 - Kotlin tree-sitter node types: `function_declaration`, `class_declaration`, `object_declaration`, `interface_declaration`, `import_header`, `property_declaration`.
 - If a go-tree-sitter grammar doesn't exist for a language, check for alternative packages or skip that language with a TODO comment. Do NOT block the entire task on one missing grammar.
 - Kotlin files can be `.kt` or `.kts` (script). Register both extensions.
+
+---
+## Completion Notes
+- **Completed by:** bravo-2
+- **Date:** 2026-03-15 16:51:18
+- **Branch:** task/026
