@@ -51,6 +51,12 @@ func NewDefaultRegistry() *Registry {
 	r.Register(NewCSharpParser())
 	r.Register(NewSwiftParser())
 	r.Register(NewKotlinParser())
+	r.Register(NewRubyParser())
+	r.Register(NewPHPParser())
+	r.Register(NewCParser())
+	r.Register(NewCPPParser())
+	r.Register(NewLuaParser())
+	r.Register(NewZigParser())
 	return r
 }
 

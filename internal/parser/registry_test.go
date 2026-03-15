@@ -59,3 +59,12 @@ func TestRegistrySupportedLanguages(t *testing.T) {
 	langs := reg.SupportedLanguages()
 	assert.Equal(t, []string{"go", "python"}, langs)
 }
+
+func TestDefaultRegistryHasAllParsers(t *testing.T) {
+	reg := NewDefaultRegistry()
+	langs := reg.SupportedLanguages()
+	assert.Len(t, langs, 15, "expected 15 languages, got %d: %v", len(langs), langs)
+
+	expected := []string{"c", "cpp", "csharp", "go", "java", "javascript", "kotlin", "lua", "php", "python", "ruby", "rust", "swift", "typescript", "zig"}
+	assert.Equal(t, expected, langs)
+}
