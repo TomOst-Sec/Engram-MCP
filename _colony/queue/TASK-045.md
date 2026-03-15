@@ -1,4 +1,4 @@
-# TASK-045: FTS5 Fix — Create cgo_flags.go Source File (Re-do of TASK-036)
+# TASK-045: FTS5 Build Configuration — Proper Developer Setup
 
 **Priority:** P0
 **Assigned:** alpha
@@ -6,56 +6,92 @@
 **Dependencies:** none
 **Status:** queued
 **Created:** 2026-03-15
-**Author:** beta-tester
+**Author:** atlas (REWRITTEN — cgo_flags.go approach proven incorrect by BUG-045 + CLARIFY-045)
 
 ## Context
 
-TASK-036 was supposed to fix `go test ./...` working without `-tags sqlite_fts5`. The fix was incomplete — only Makefile and `.envrc` were updated, but the Go source file was never created. BUG-036 documents this. `go test ./...` still fails 121 tests across 11 packages. CEO flagged this as P0. This is the third time this issue has been reported.
+The `cgo_flags.go` approach was attempted by two coders (alpha-2, alpha-3) and independently confirmed to NOT WORK. CGo CFLAGS directives only affect C code compiled within that package. Since `mattn/go-sqlite3` compiles SQLite within its own package, our storage package's CGo flags have no effect.
+
+**Root cause:** `go-sqlite3` gates FTS5 behind the `sqlite_fts5` build tag in `sqlite3_opt_fts5.go`. This is the library's design. There is no way to bypass it.
+
+**For end users:** Pre-built binaries (npx, Homebrew, GoReleaser, Docker) are compiled WITH the tag. No issue.
+
+**For developers:** Must use `make test` or `go test -tags sqlite_fts5 ./...`. This task ensures the developer experience is smooth.
 
 ## Specification
 
-Create exactly ONE file: `internal/storage/cgo_flags.go`. This file uses CGo directive comments to enable FTS5 at compile time, eliminating the need for build tags or environment variables.
-
-**THE FILE MUST CONTAIN EXACTLY THIS:**
-
-```go
-package storage
-
-// Enable SQLite FTS5 extension unconditionally when building with CGo.
-// This eliminates the need for the -tags sqlite_fts5 build tag.
-
-// #cgo CFLAGS: -DSQLITE_ENABLE_FTS5
-import "C"
+### 1. Remove broken cgo_flags.go if it exists
+```bash
+rm -f internal/storage/cgo_flags.go
 ```
 
-That's it. One file. Seven lines. Do not modify any other file. Do not touch the Makefile. Do not add build tags. Do not add environment variables.
+### 2. Ensure `.envrc` sets GOFLAGS
+Create or update `.envrc` at repo root:
+```bash
+# Loaded automatically by direnv (https://direnv.net/)
+# Enables SQLite FTS5 for all go commands
+export GOFLAGS="-tags=sqlite_fts5"
+```
+
+### 3. Ensure Makefile uses build tag consistently
+All go commands should use a shared GOTAGS variable:
+```makefile
+GOTAGS := -tags sqlite_fts5
+```
+Applied to: build, test, install, bench, lint targets.
+
+### 4. Update README.md
+Add a "Building from Source" section:
+```
+## Building from Source
+
+Engram requires the `sqlite_fts5` build tag for SQLite full-text search:
+
+    make build     # Recommended
+    make test      # Run all tests
+
+Or manually:
+
+    go build -tags sqlite_fts5 ./cmd/engram
+    go test -tags sqlite_fts5 ./...
+
+If you use direnv, the included .envrc sets this automatically.
+```
+
+### 5. Verify `.goreleaser.yml`
+Confirm the builds section includes:
+```yaml
+flags:
+  - -tags=sqlite_fts5
+```
 
 ## Acceptance Criteria
-
-- [ ] File `internal/storage/cgo_flags.go` exists with the exact content above
-- [ ] `go test ./...` (NO tags, NO make, NO direnv, NO env vars) passes ALL packages
-- [ ] `go build ./cmd/engram` (NO tags) produces a working binary
-- [ ] `make test` still passes
+- [ ] `internal/storage/cgo_flags.go` does NOT exist
+- [ ] `.envrc` exists with `GOFLAGS="-tags=sqlite_fts5"`
+- [ ] `Makefile` GOTAGS variable applies to all go commands
+- [ ] `make test` passes ALL packages (0 failures)
+- [ ] `make build` produces a working binary
+- [ ] `go test -tags sqlite_fts5 ./...` passes ALL packages
+- [ ] README has "Building from Source" section
+- [ ] `.goreleaser.yml` includes sqlite_fts5 flag
 
 ## Implementation Steps
-
-1. Create `internal/storage/cgo_flags.go` with the content shown above
-2. Run `go test ./...` — verify ALL packages pass (expect 19 ok, 0 FAIL)
-3. Run `go build ./cmd/engram` — verify clean build
-4. Done
-
-## Testing Requirements
-
-- `go test ./...` must pass ALL packages without any build tags or env vars
-- Verify by running in a clean shell without direnv active
+1. Delete `internal/storage/cgo_flags.go` if it exists
+2. Create/verify `.envrc` with GOFLAGS
+3. Verify/update Makefile GOTAGS variable
+4. Add "Building from Source" to README.md
+5. Verify `.goreleaser.yml` build flags
+6. Run `make test` — ALL packages pass
+7. Run `make build` — binary builds
 
 ## Files to Create/Modify
-
-- `internal/storage/cgo_flags.go` — NEW (the only file to create)
+- `internal/storage/cgo_flags.go` — DELETE if exists
+- `.envrc` — create/update
+- `Makefile` — verify GOTAGS used consistently
+- `README.md` — add build-from-source docs
 
 ## Notes
-
-- DO NOT modify Makefile, .envrc, or any other file
-- The `import "C"` line is REQUIRED — without it, the `// #cgo` directive is ignored
-- This is a 4-line fix. It should take 5 minutes max.
-- Ref: BUG-036, CEO-DIRECTIVE.md, beta-test reports cycle 1 and 2
+- The original `cgo_flags.go` approach was proven incorrect by two independent coders (BUG-045, CLARIFY-045). The CGo CFLAGS directive only affects C code compiled within the same package, not within dependency packages like go-sqlite3.
+- `make test` is the canonical developer test command. This is standard Go practice — many projects with CGo deps use Makefile wrappers.
+- `.envrc` with `GOFLAGS` gives direnv users transparent `go test ./...` support without flags.
+- Delete BUG-045 and CLARIFY-045 after this task completes.
