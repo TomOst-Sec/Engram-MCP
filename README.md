@@ -56,6 +56,15 @@ Add to `.cursor/mcp.json`:
 engram status
 ```
 
+## Supported AI Tools
+
+- [Claude Code](docs/claude-code.md)
+- [Cursor](docs/cursor.md)
+- [Codex CLI](docs/codex.md)
+- [Windsurf](docs/windsurf.md)
+- [GitHub Copilot](docs/copilot.md)
+- Any MCP-compatible tool
+
 ## MCP Tools
 
 | Tool | Description |
@@ -64,6 +73,8 @@ engram status
 | `remember` | Store a memory from the current session |
 | `recall` | Retrieve memories from past sessions |
 | `get_architecture` | Get project module map and dependencies |
+| `get_history` | Git history and change context |
+| `get_conventions` | Team coding patterns and conventions |
 | `engram_status` | Server health check |
 
 ## CLI Commands
