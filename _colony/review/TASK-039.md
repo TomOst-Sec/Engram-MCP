@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M3: Polish & Growth
 **Dependencies:** TASK-019
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -109,3 +109,9 @@ Installed packs stored as JSON files in `~/.engram/packs/`:
 - Cache downloaded packs locally. Don't re-download on every `engram serve` start.
 - The merge logic is simple: for each community convention, check if a local convention exists with the same pattern+language. If yes, keep local. If no, add community.
 - Convention packs are additive only — they can't remove or override local conventions.
+
+---
+## Completion Notes
+- **Completed by:** bravo-1
+- **Date:** 2026-03-15 18:09:32
+- **Branch:** task/039
