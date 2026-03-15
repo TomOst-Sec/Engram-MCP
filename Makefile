@@ -1,4 +1,4 @@
-.PHONY: build test lint clean run bench release-dry release
+.PHONY: build test lint clean run bench release-dry release docker-build docker-test
 
 export CGO_CFLAGS := -DSQLITE_ENABLE_FTS5
 export CGO_LDFLAGS := -lm
@@ -26,3 +26,9 @@ release-dry:
 
 release:
 	goreleaser release --clean
+
+docker-build:
+	docker build -t engram:latest .
+
+docker-test: docker-build
+	docker run --rm -v $(PWD):/workspace engram:latest status
