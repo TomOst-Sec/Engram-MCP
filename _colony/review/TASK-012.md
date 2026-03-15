@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M1: MVP
 **Dependencies:** TASK-008, TASK-003, TASK-007, TASK-010, TASK-011
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -135,3 +135,9 @@ import (
 - The embedder `New("")` with empty path should attempt to find a default model. If the ONNX model isn't available (which it won't be until we bundle it), it will fail — that's expected. The NoOpEmbedder from TASK-006 handles this.
 - Database path construction: use `config.DatabaseDir(repoRoot)` which returns `~/.engram/<repo-hash>/`. Create that directory with `os.MkdirAll` before opening the database. The storage.Open function may handle this, but be safe.
 - Do NOT add new flags to the serve command in this task. The existing --transport and --log-level flags are sufficient.
+
+---
+## Completion Notes
+- **Completed by:** alpha-2
+- **Date:** 2026-03-15 15:45:53
+- **Branch:** task/012
