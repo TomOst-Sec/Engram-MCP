@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M3: Polish & Growth
 **Dependencies:** TASK-006
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -146,3 +146,9 @@ engram serve --embedding-model ollama
 - Do NOT modify the existing `Embedder` struct (ONNX). Only add new files and an interface.
 - The dimension mismatch between ONNX (384) and Ollama models (varies) means you should NOT hardcode 384 dims anywhere in the search/similarity code. Check that `internal/embeddings/similarity.go` works with arbitrary dimensions.
 - If updating any callers from `*Embedder` to `EmbedderInterface`, make sure to update serve.go and index.go type references. But prefer not changing callers in this task — just add the interface and Ollama implementation.
+
+---
+## Completion Notes
+- **Completed by:** bravo-1
+- **Date:** 2026-03-15 17:28:59
+- **Branch:** task/034
