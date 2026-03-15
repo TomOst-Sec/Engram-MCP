@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M1: MVP
 **Dependencies:** TASK-003, TASK-005
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -197,3 +197,9 @@ func RegisterTools(server *mcp.Server, store *storage.Store, repoRoot string)
 - For MVP, focus on Go import resolution (since the Engram codebase is Go). TS/Python resolution can be improved later.
 - The `architecture` table in SQLite can cache computed module data. Query code_index for raw data, write aggregated results to architecture table.
 - Do NOT read files from disk in this tool. All data comes from the code_index table (populated by the indexer pipeline). This keeps the tool fast (<200ms).
+
+---
+## Completion Notes
+- **Completed by:** alpha-2
+- **Date:** 2026-03-15 15:26:51
+- **Branch:** task/011
