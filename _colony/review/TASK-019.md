@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M2: Core Features
 **Dependencies:** TASK-003, TASK-005
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -187,3 +187,9 @@ func RegisterTools(server *engmcp.Server, store *storage.Store, repoRoot string)
 - Do NOT modify `cmd/engram/serve.go` in this task. The tool will be wired into the serve command in a later task.
 - For naming detection, only analyze user-defined symbols (functions, methods, types, classes). Skip imports and built-in names.
 - The confidence threshold for reporting is 60%. Below that, the codebase is too inconsistent to call it a "convention."
+
+---
+## Completion Notes
+- **Completed by:** bravo-1
+- **Date:** 2026-03-15 17:04:48
+- **Branch:** task/019
