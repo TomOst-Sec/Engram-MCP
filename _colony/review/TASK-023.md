@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M2: Core Features
 **Dependencies:** TASK-013
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -108,3 +108,9 @@ When `--watch` is set:
 - fsnotify on Linux uses inotify which has a per-user watch limit (default ~8192). For large repos, this may need to be increased via `fs.inotify.max_user_watches`. Log a warning if adding a watch fails.
 - The debounce implementation: use a `map[string]*time.Timer` where each file path has a pending timer. On event, reset the timer. When timer fires, do the indexing.
 - Do NOT start the watcher from `engram serve`. That's a future enhancement. For now, only `engram index --watch` uses it.
+
+---
+## Completion Notes
+- **Completed by:** alpha-3
+- **Date:** 2026-03-15 17:51:13
+- **Branch:** task/023
