@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M1: MVP
 **Dependencies:** TASK-003, TASK-008
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -192,3 +192,9 @@ func openDatabase() (*storage.Store, string, error) {
 - For database file size, use `os.Stat(dbPath).Size()` and format with human-readable units (KB, MB).
 - Join query args with space for multi-word queries: `query := strings.Join(args, " ")`
 - The `detectRepoRoot()` function already exists in serve.go. Extract it to db.go so all commands can use it. If extraction is too risky (modifying serve.go), duplicate it — it's a simple function.
+
+---
+## Completion Notes
+- **Completed by:** alpha-2
+- **Date:** 2026-03-15 16:07:32
+- **Branch:** task/015
