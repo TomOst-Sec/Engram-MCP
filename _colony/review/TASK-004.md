@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M1: MVP
 **Dependencies:** TASK-001
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -97,3 +97,9 @@ func (s *Server) Shutdown() error
 - The `engram_status` tool is intentionally simple — it's a proof-of-life for the MCP pipeline. Real tools (search, remember, recall) come in later tasks.
 - Do NOT start the stdio server in tests (it blocks on stdin). Test the handler functions directly.
 - Store the server start time in the Server struct to compute uptime.
+
+---
+## Completion Notes
+- **Completed by:** alpha-1
+- **Date:** 2026-03-15 15:05:24
+- **Branch:** task/004
