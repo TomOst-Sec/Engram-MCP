@@ -16,5 +16,6 @@ _colony/scripts/.venv/
 *.swp
 *.swo
 bin/
+!npm/bin/
 *.exe
 *.db
