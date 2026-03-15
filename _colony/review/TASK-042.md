@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M3: Polish & Growth
 **Dependencies:** TASK-001
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -156,3 +156,9 @@ jobs:
 - The Homebrew tap repo (TomOst-Sec/homebrew-tap) doesn't need to exist for the config to be correct.
 - AUR and Scoop packages are lower priority — add comments in .goreleaser.yml noting they'll be added later.
 - Do NOT run `goreleaser release` — just create the config and dry-run.
+
+---
+## Completion Notes
+- **Completed by:** alpha-3
+- **Date:** 2026-03-15 18:03:23
+- **Branch:** task/042
