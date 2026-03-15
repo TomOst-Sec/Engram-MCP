@@ -46,6 +46,8 @@ func NewDefaultRegistry() *Registry {
 	r.Register(NewPythonParser())
 	r.Register(NewTypeScriptParser())
 	r.Register(NewJavaScriptParser())
+	r.Register(NewRustParser())
+	r.Register(NewJavaParser())
 	return r
 }
 
