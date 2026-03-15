@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  engram:
+    build: .
+    volumes:
+      - .:/workspace:ro
+      - engram-data:/home/engram/.engram
+    ports:
+      - "3333:3333"
+    command: ["serve", "--transport", "http", "--http-addr", "0.0.0.0:3333"]
+
+volumes:
+  engram-data:

@@ -1,0 +1,12 @@
+.git
+_colony
+.worktrees
+*.db
+node_modules
+vendor
+dist
+build
+coverage
+*.log
+.env
+.env.local
