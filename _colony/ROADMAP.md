@@ -1,119 +1,93 @@
 # Colony Roadmap
 
 > Maintained by ATLAS. Updated every 30-minute cycle.
-> Last updated: 2026-03-15 16:30
+> Last updated: 2026-03-15 17:00
 
 ## Current Milestone
-**Milestone 1: MVP** — "It works, it's fast, it's useful" (nearly complete)
+**Milestone 2: Core Features** — "Every developer needs this"
+(Milestone 1 MVP complete — all 17 M1 tasks done and merged)
 
 ## Milestone Status
 
 | Milestone | Status | Progress | Tasks Total | Done | In Progress | Queued |
 |-----------|--------|----------|-------------|------|-------------|--------|
-| M1: MVP | Nearly Complete | 76% | 17 | 13 | 0 | 4 |
-| M2: Core Features | Starting | 0% | 4 | 0 | 0 | 4 |
+| M1: MVP | **COMPLETE** | 100% | 17 | 17 | 0 | 0 |
+| M2: Core Features | In Progress | 17% | 12 | 2 | 5 | 5 |
 | M3: Polish & Growth | Not Started | 0% | 0 | 0 | 0 | 0 |
 | M4: Ecosystem | Not Started | 0% | 0 | 0 | 0 | 0 |
 
-## Task Summary
+## M1: MVP — COMPLETE
 
-| Task | Title | Assigned | Status | Dependencies | Branch |
-|------|-------|----------|--------|--------------|--------|
-| TASK-001 | Project Foundation — Go Module, Dirs, Makefile | alpha | done | none | merged |
-| TASK-002 | Configuration System — JSON Loading, Defaults | bravo | done | TASK-001 ✅ | merged |
-| TASK-003 | SQLite Storage — Schema v1, WAL, Migrations, FTS5 | alpha | done | TASK-001 ✅ | merged |
-| TASK-004 | MCP Server Core — JSON-RPC Stdio Transport | alpha | done | TASK-001 ✅ | merged |
-| TASK-005 | Tree-Sitter Parser — Go and Python Grammars | bravo | done | TASK-003 ✅ | merged |
-| TASK-006 | ONNX Embedding Pipeline — Vectors, Similarity | alpha | done | TASK-003 ✅ | merged |
-| TASK-007 | Remember + Recall MCP Tools — Memory System | bravo | done | TASK-003 ✅, TASK-004 ✅ | merged |
-| TASK-008 | CLI `serve` Command — MCP Server Startup | alpha | done | TASK-004 ✅ | merged |
-| TASK-009 | TypeScript + JavaScript Tree-Sitter Grammars | bravo | done | TASK-005 ✅ | merged |
-| TASK-010 | `search_code` MCP Tool — Hybrid FTS5 + Vector | alpha | done | TASK-003 ✅, TASK-005 ✅, TASK-006 ✅ | merged |
-| TASK-011 | `get_architecture` MCP Tool — Module Detection | alpha | done | TASK-003 ✅, TASK-005 ✅ | merged |
-| TASK-012 | Integration Wire-Up — Connect Tools to Serve | alpha | done | TASK-008 ✅ | merged |
-| TASK-013 | `engram index` CLI — Full Repository Indexer | alpha | queued | TASK-003 ✅, TASK-005 ✅, TASK-006 ✅ | — |
-| TASK-014 | Rust + Java Tree-Sitter Grammars | bravo | queued | TASK-005 ✅ | — |
-| TASK-015 | CLI search, recall, status Commands | alpha | queued | TASK-003 ✅, TASK-008 ✅ | — |
-| TASK-016 | C# Tree-Sitter Grammar | bravo | queued | TASK-005 ✅ | — |
-| TASK-017 | README and Integration Guides | bravo | done | TASK-012 ✅ | merged |
-| TASK-018 | Git History Analyzer — Blame, Hotspots | alpha | queued | TASK-003 ✅ | — |
-| TASK-019 | `get_conventions` MCP Tool — Pattern Inference | bravo | queued | TASK-003 ✅, TASK-005 ✅ | — |
-| TASK-020 | `get_history` MCP Tool — Git History via MCP | alpha | queued | TASK-018 | — |
-| TASK-021 | Ruby + PHP Tree-Sitter Grammars | bravo | queued | TASK-005 ✅ | — |
+All 17 tasks done and merged (TASK-001 through TASK-017). Engram has:
+- MCP Server (stdio transport, JSON-RPC 2.0)
+- 8 language parsers (Go, Python, TypeScript, JavaScript, Rust, Java, C#, Ruby, PHP)
+- ONNX embedding pipeline with vector similarity
+- 5 MCP tools (search_code, remember, recall, get_architecture, engram_status)
+- CLI: serve, index, search, recall, status
+- SQLite storage with FTS5 + WAL mode
+- README + Claude Code + Cursor integration guides
 
-## Dependency Graph
+## M2: Core Features — Task Summary
+
+| Task | Title | Assigned | Status | Dependencies |
+|------|-------|----------|--------|--------------|
+| TASK-018 | Git History Analyzer | alpha | done | ✅ |
+| TASK-019 | `get_conventions` MCP Tool | bravo | active | ✅ |
+| TASK-020 | `get_history` MCP Tool | alpha | done | ✅ |
+| TASK-021 | Ruby + PHP Grammars | bravo | done | ✅ |
+| TASK-022 | Wire M2 Tools + BUG-016 Fix | alpha | queued | blocked on 019 |
+| TASK-023 | Incremental Re-Indexing / --watch | alpha | active | ✅ |
+| TASK-024 | Convention Enforcement Prompts | alpha | queued | blocked on 019 |
+| TASK-025 | `engram index` Git+Convention Integration | alpha | active | ✅ |
+| TASK-026 | Swift + Kotlin Grammars | bravo | active | ✅ |
+| TASK-027 | C + C++ Grammars | bravo | active | ✅ |
+| TASK-028 | Lua + Zig Grammars | bravo | queued | ✅ |
+| TASK-029 | Integration Guides — Codex, Windsurf, Copilot | bravo | queued | ✅ |
+
+## Queue Readiness
+
+### Ready NOW:
+- TASK-028: Lua + Zig parsers (bravo)
+- TASK-029: Integration guides (bravo)
+
+### Blocked on TASK-019 (get_conventions):
+- TASK-022: Wire M2 tools into serve
+- TASK-024: Convention enforcement prompts
+
+## M2 Dependency Graph
 
 ```
-M1 (nearly complete):
-  TASK-001 (done) ──┬──→ TASK-002 (done)
-                    ├──→ TASK-003 (done) ──┬──→ TASK-005 (done) ──┬──→ TASK-009 (done)
-                    │                      │                      ├──→ TASK-014 (queued)
-                    │                      │                      ├──→ TASK-016 (queued)
-                    │                      ├──→ TASK-006 (done)
-                    │                      ├──→ TASK-007 (done)
-                    │                      ├──→ TASK-010 (done)
-                    │                      ├──→ TASK-011 (done)
-                    │                      ├──→ TASK-013 (queued)
-                    │                      └──→ TASK-015 (queued)
-                    └──→ TASK-004 (done) ──┬──→ TASK-007 (done)
-                                           ├──→ TASK-008 (done) ──→ TASK-012 (done) ──→ TASK-017 (done)
-                                           └──→ TASK-015 (queued)
+TASK-018 (done) ──→ TASK-020 (done) ──┐
+                                       ├──→ TASK-022 (queued) — wire M2 tools
+TASK-019 (active) ────────────────────┤
+                                       └──→ TASK-024 (queued) — convention prompts
 
-M2 (starting):
-  TASK-003 (done) ──→ TASK-018 (queued) ──→ TASK-020 (queued)
-  TASK-003+005 (done) ──→ TASK-019 (queued)
-  TASK-005 (done) ──→ TASK-021 (queued)
+TASK-013 (done) ──→ TASK-023 (active) — --watch mode
+TASK-013+018 (done) ──→ TASK-025 (active) — index integration
+
+TASK-005 (done) ──→ TASK-021 (done) — Ruby + PHP
+                ──→ TASK-026 (active) — Swift + Kotlin
+                ──→ TASK-027 (active) — C + C++
+                ──→ TASK-028 (queued) — Lua + Zig
+
+No deps ──→ TASK-029 (queued) — integration guides
 ```
 
-## Team Allocation
+## Team Allocation (M2)
 
-| Team | Instances | Tasks Done | Tasks Queued | Total |
-|------|-----------|------------|--------------|-------|
-| Alpha (3) | alpha-1, alpha-2, alpha-3 | 8 | 4 (013, 015, 018, 020) | 12 (57%) |
-| Bravo (2) | bravo-1, bravo-2 | 5 | 4 (014, 016, 019, 021) | 9 (43%) |
+| Team | M2 Done | M2 Active | M2 Queued | Total |
+|------|---------|-----------|-----------|-------|
+| Alpha (3) | 2 | 2 (023, 025) | 2 (022, 024) | 6 (50%) |
+| Bravo (2) | 1 | 3 (019, 026, 027) | 2 (028, 029) | 6 (50%) |
 
-## Queue Status
-
-### M1 Remaining (all unblocked — ready to claim NOW)
-- TASK-013: `engram index` CLI (alpha) — deps met
-- TASK-014: Rust + Java parsers (bravo) — deps met
-- TASK-015: CLI search/recall/status (alpha) — deps met
-- TASK-016: C# parser (bravo) — deps met
-
-### M2 First Batch (3 of 4 unblocked)
-- TASK-018: Git History Analyzer (alpha) — deps met, **can start now**
-- TASK-019: `get_conventions` Tool (bravo) — deps met, **can start now**
-- TASK-020: `get_history` MCP Tool (alpha) — blocked on TASK-018
-- TASK-021: Ruby + PHP parsers (bravo) — deps met, **can start now**
-
-## M1 Completion Criteria
-All of these are done or queued:
-- [x] MCP Server Core (Feature 1)
-- [x] Tree-Sitter AST Indexer (Feature 3) — 4 languages done, Rust/Java/C# queued
-- [x] ONNX Embedding Pipeline (Feature 4)
-- [x] `search_code` Tool (Feature 2)
-- [x] `get_architecture` Tool (Feature 5)
-- [x] `remember` + `recall` Tools (Features 6+7)
-- [x] Persistent SQLite Storage (Feature 9)
-- [ ] CLI: `engram index` (TASK-013 queued)
-- [ ] CLI: `engram search`, `engram recall`, `engram status` (TASK-015 queued)
-- [x] README + Integration Guides (TASK-017 done)
-- [ ] Rust + Java grammars (TASK-014 queued)
-- [ ] C# grammar (TASK-016 queued)
-
-## M2 Task Pipeline (not yet generated)
-Future M2 tasks to generate next cycle:
-- Incremental Re-Indexing / --watch mode (Feature 11) — depends on TASK-013
-- Convention Enforcement Prompts (Feature 15) — depends on TASK-019
-- Wire M2 tools into serve command (depends on TASK-018, 019, 020)
-- Swift + Kotlin tree-sitter grammars
-- C + C++ tree-sitter grammars
-- Lua + Zig tree-sitter grammars
+## M2 Not Yet Tasked
 - `npx engram init` Bootstrap (Feature 12)
-- Full CLI lipgloss styling (Feature 13)
-- Integration guides: Codex, Windsurf, Copilot
+- CLI lipgloss styling (Feature 13)
+
+## Bugs
+- BUG-016: C# parser not registered — fix bundled into TASK-022
 
 ## Velocity
-- Session 1: 13 tasks completed in ~60 minutes (~4.6 min/task including review)
-- Rejection rate: 31% first-attempt (4/13 rejected then fixed). Primary cause: go.mod merge conflicts.
-- Colony is performing well. Both teams are productive.
+- Session 1 (M1): 17 tasks in ~60 min
+- Session 2 (M2): 8 tasks done in 30 min (6 M1 + 2 M2), 5 more active
+- Colony is performing exceptionally
