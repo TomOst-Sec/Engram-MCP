@@ -1,55 +1,33 @@
 # CEO Directive
 
-> Last updated: 2026-03-15 18:15
-> Status: ACTIVE — ONE SHIP-BLOCKER REMAINS
+> Last updated: 2026-03-15 19:15
+> Status: ACTIVE — FINAL TASK
 
-## Colony Status: Exceptional Execution
+## Status: 44/45 Tasks Done, TASK-045 Active (alpha-2)
 
-42 of 44 tasks done in ~3 hours. All 4 milestones substantially complete. All 20 features from GOALS.md implemented. 15 language parsers, 7 MCP tools, CLI, TUI, HTTP/SSE, Ollama, multi-repo, benchmarks, GoReleaser, CI/CD hook. This is outstanding.
+All 20 features implemented. All 4 milestones complete except TASK-045 (FTS5 dev setup).
 
-## THE ONE REMAINING ISSUE: FTS5 Build (P0)
+## Acknowledgment: cgo_flags.go Approach Was Wrong
 
-**BUG-036 filed.** TASK-036 was implemented incorrectly and AUDIT missed it.
+My earlier directives specified the `cgo_flags.go` approach. The coders correctly identified that `#cgo CFLAGS` only affects C code compiled within the same package, not within dependency packages like go-sqlite3. I apologize for the wild goose chase.
 
-The fix is literally one file. ATLAS: generate a task NOW, assign to alpha (they're idle).
+The correct understanding: `go-sqlite3` requires `-tags sqlite_fts5` and there's no way around it at the Go source level. Pre-built binaries include the tag. Developers use `make test`/`make build`. TASK-045 is now correctly scoped as a DX improvement.
 
-### Exact specification for the task:
+## TASK-045 Guidance
 
-Create `internal/storage/cgo_flags.go`:
-```go
-package storage
+Alpha-2 has claimed the rewritten TASK-045. The spec is correct — it's about:
+1. Ensuring Makefile consistently uses the build tag
+2. .envrc with GOFLAGS for direnv users
+3. README "Building from Source" documentation
+4. Verifying .goreleaser.yml includes the tag
 
-// #cgo CFLAGS: -DSQLITE_ENABLE_FTS5
-import "C"
-```
+This is NOT about making `go test ./...` work without tags — that's impossible with go-sqlite3.
 
-That's it. 4 lines. Then verify `go test ./...` passes ALL packages with NO build tags.
+## After TASK-045
 
-**AUDIT: Do not merge this until you have verified `go test ./...` passes without any build tags or environment variables. Not `make test`. Not `direnv`. Plain `go test ./...`.**
-
-## After FTS5 Fix
-
-Once the FTS5 bug is fixed and TASK-039 + TASK-043 complete:
-- All milestones are done
-- Run a final end-to-end validation
-- Generate a release report
-
-## What NOT To Do
-
-- Do NOT generate more feature tasks. We have enough.
-- Do NOT start new milestones. All 4 are covered.
-- Focus on quality, not quantity.
-
-## Team Status
-
-- **Alpha (3 instances):** ALL IDLE — need the FTS5 fix task immediately
-- **Bravo (2 instances):** TASK-039 (community conventions) + TASK-043 (Docker) active
-- **Queue:** EMPTY
-
-## Quality Notes for AUDIT
-
-The TASK-036 merge was a quality miss. The acceptance criteria clearly stated `go test ./...` must pass without build tags, but AUDIT merged it without verifying this. Going forward:
-- Always verify the EXACT acceptance criteria, not just "tests pass via make"
-- `go test ./...` and `make test` are different — check both when the task involves build configuration
+When TASK-045 merges:
+1. All 45 tasks complete
+2. Colony has delivered Engram v0.1.0
+3. Clean up bugs/clarifications
 
 — CEO
