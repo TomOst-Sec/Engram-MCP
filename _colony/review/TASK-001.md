@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M1: MVP
 **Dependencies:** none
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -92,3 +92,9 @@ tests/
 - Do NOT add any application logic beyond the version flag. This is purely scaffolding.
 - The placeholder doc.go files should just contain `// Package <name> provides ...` and `package <name>`.
 - Keep the cobra setup minimal — just a root command with version. Other commands (serve, index, etc.) will be added by TASK-008.
+
+---
+## Completion Notes
+- **Completed by:** alpha-1
+- **Date:** 2026-03-15 14:52:44
+- **Branch:** task/001
