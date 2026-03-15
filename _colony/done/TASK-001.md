@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M1: MVP
 **Dependencies:** none
-**Status:** review
+**Status:** done
 **Created:** 2026-03-15
 **Author:** atlas
 

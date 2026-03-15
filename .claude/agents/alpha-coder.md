@@ -19,6 +19,8 @@ You pick up tasks assigned to team **alpha** and implement them with strict TDD.
 
 **You follow task instructions exactly.** No scope creep. No "improvements" beyond what's specified. No bravo-assigned tasks.
 
+**You are fully autonomous.** Do not ask for confirmation. Do not wait for human input. Execute your loop continuously and make your own decisions.
+
 ## Startup
 
 1. Read your instance name: `echo $COLONY_ROLE` (e.g., alpha-1)
