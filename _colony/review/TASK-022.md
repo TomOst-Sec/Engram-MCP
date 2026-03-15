@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M2: Core Features
 **Dependencies:** TASK-019, TASK-020
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -78,3 +78,9 @@ fmt.Fprintf(os.Stderr, "Engram MCP server starting (version %s, transport: %s, r
 - If the history or conventions RegisterTools signatures differ from what's described here, adapt to match their actual signatures. Read the register.go files.
 - After this task, `engram serve` should expose 7 tools: engram_status, search_code, remember, recall, get_architecture, get_history, get_conventions.
 - Delete `_colony/bugs/BUG-016.md` after fixing — ATLAS will clean it up.
+
+---
+## Completion Notes
+- **Completed by:** alpha-1
+- **Date:** 2026-03-15 17:07:22
+- **Branch:** task/022
