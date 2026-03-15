@@ -29,6 +29,7 @@ func newRootCmd() *cobra.Command {
 	cmd.AddCommand(newExportCmd())
 	cmd.AddCommand(newImportCmd())
 	cmd.AddCommand(newCIHookCmd())
+	cmd.AddCommand(newConventionsCmd())
 	return cmd
 }
 
