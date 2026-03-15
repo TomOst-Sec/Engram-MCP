@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M1: MVP
 **Dependencies:** TASK-005
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -94,3 +94,9 @@ C# uses namespaces extensively. Symbol names should include the class context:
 - C# access modifiers are part of the declaration node (child nodes of type `modifier`). Extract `public`, `private`, `protected`, `internal`, `static`, `abstract`, `virtual`, `override`.
 - Generic type parameters should be preserved in signatures: `public List<T> GetItems<T>() where T : IComparable`.
 - Do NOT modify any existing parser files beyond adding the registration entry.
+
+---
+## Completion Notes
+- **Completed by:** bravo-1
+- **Date:** 2026-03-15 16:10:56
+- **Branch:** task/016
