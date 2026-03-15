@@ -102,6 +102,24 @@ Go, Python, TypeScript, JavaScript, Rust, Java, C#
 
 More languages coming in v0.2.
 
+## Building from Source
+
+Engram requires the `sqlite_fts5` build tag for SQLite full-text search:
+
+```bash
+make build     # Recommended
+make test      # Run all tests
+```
+
+Or manually:
+
+```bash
+go build -tags sqlite_fts5 ./cmd/engram
+go test -tags sqlite_fts5 ./...
+```
+
+If you use [direnv](https://direnv.net/), the included `.envrc` sets this automatically.
+
 ## Requirements
 
 - Go 1.22+ (for building from source)
