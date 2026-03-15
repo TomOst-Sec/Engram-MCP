@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M1: MVP
 **Dependencies:** TASK-001
-**Status:** review
+**Status:** queued
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -103,3 +103,8 @@ func (s *Server) Shutdown() error
 - **Completed by:** alpha-1
 - **Date:** 2026-03-15 15:05:24
 - **Branch:** task/004
+
+## Rejection Notes
+- **Rejected by:** audit
+- **Date:** 2026-03-15 15:08
+- **Reason:** CODE IS APPROVED — merge conflict in go.mod/go.sum due to TASK-003 merge. Coder needs to rebase on current main (`git pull origin main --rebase`), resolve trivial dependency conflict, run `go mod tidy`, verify tests, and re-push. See `_colony/bugs/BUG-004.md`.

@@ -1,44 +1,56 @@
 # Colony Hourly Status
 
-> Updated by AUDIT every cycle. Last update: 2026-03-15 14:58
+> Updated by AUDIT every cycle. Last update: 2026-03-15 15:08
 
 ## Current State
 
 | Queue | Active | Review | Done | Bugs |
 |-------|--------|--------|------|------|
-| 5     | 1      | 0      | 1    | 0    |
+| 8     | 2      | 0      | 2    | 2    |
 
 ## Active Tasks
 
 | Task | Title | Assigned | Instance | Since |
 |------|-------|----------|----------|-------|
-| TASK-002 | Configuration System — engram.json | bravo | bravo-2 | 14:54 |
+| TASK-005 | ? | bravo | bravo-2 | ~15:05 |
+| TASK-006 | ? | alpha | alpha-3 | ~15:05 |
 
 ## Recently Completed
 
 | Task | Title | Author | Merged |
 |------|-------|--------|--------|
-| TASK-001 | Project Foundation — Go Module, Directory, Makefile | alpha-1 | 14:52 (bootstrap) |
+| TASK-001 | Project Foundation | alpha-1 | 14:52 (bootstrap) |
+| TASK-003 | SQLite Storage Layer | alpha-2 | 15:06 |
+
+## Recently Rejected
+
+| Task | Title | Reason |
+|------|-------|--------|
+| TASK-002 | Configuration System | Missing ALL required tests (0 of 8) |
+| TASK-004 | MCP Server Core | Code approved, merge conflict — needs rebase |
 
 ## Queue
 
-| Task | Title | Assigned | Priority |
-|------|-------|----------|----------|
-| TASK-003 | ? | ? | ? |
-| TASK-004 | ? | ? | ? |
-| TASK-005 | ? | ? | ? |
-| TASK-006 | ? | ? | ? |
-| TASK-007 | ? | ? | ? |
+TASK-002 (requeued), TASK-004 (requeued), TASK-005, TASK-007, TASK-008, TASK-009, TASK-010, TASK-011
 
 ## Codebase Health
 
 - Build: PASS
-- Tests: 1 package passing (cmd/engram), 6 packages no tests yet
-- Bugs: 0
+- Tests: 12/12 passing (2 cmd/engram + 10 internal/storage)
+- Packages with tests: 2 of 7
+- Bugs: 2 (BUG-002: missing tests, BUG-004: trivial rebase needed)
+
+## Velocity
+
+- Reviewed: 3 tasks this cycle
+- Merged: 1 (TASK-003)
+- Rejected: 2 (TASK-002 quality, TASK-004 conflict)
+- Colony uptime: ~28 minutes
 
 ## Notes
 
-- Colony started ~14:40. AUDIT online at 14:58.
-- TASK-001 was merged during bootstrap (no formal AUDIT review). Code verified healthy post-hoc.
-- ROADMAP.md not yet populated by ATLAS.
-- Waiting for first task branches to arrive in review/.
+- ATLAS generated TASK-008 through TASK-011 at ~15:04
+- bravo-1 picked up TASK-002 (re-claimed after rejection)
+- bravo-2 moved to TASK-005
+- alpha-3 working on TASK-006
+- TASK-004 rejection is trivial — just needs rebase on main after TASK-003 merge
