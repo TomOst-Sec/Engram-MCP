@@ -39,6 +39,16 @@ func (r *Registry) ParseFile(filePath string, source []byte) ([]Symbol, error) {
 	return p.Parse(filePath, source)
 }
 
+// NewDefaultRegistry creates a Registry pre-loaded with all available parsers.
+func NewDefaultRegistry() *Registry {
+	r := NewRegistry()
+	r.Register(NewGoParser())
+	r.Register(NewPythonParser())
+	r.Register(NewTypeScriptParser())
+	r.Register(NewJavaScriptParser())
+	return r
+}
+
 // SupportedLanguages returns a sorted list of language names from all registered parsers.
 func (r *Registry) SupportedLanguages() []string {
 	seen := make(map[string]bool)
