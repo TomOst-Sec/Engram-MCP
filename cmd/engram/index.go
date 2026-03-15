@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/TomOst-Sec/colony-project/internal/cli"
 	"github.com/TomOst-Sec/colony-project/internal/config"
 	"github.com/TomOst-Sec/colony-project/internal/conventions"
 	"github.com/TomOst-Sec/colony-project/internal/embeddings"
@@ -64,7 +65,7 @@ func runIndex(cmd *cobra.Command, args []string) error {
 	registry := parser.NewDefaultRegistry()
 
 	// 6. Run the indexer
-	fmt.Fprintf(os.Stderr, "Engram indexing %s...\n", repoRoot)
+	fmt.Fprintln(os.Stderr, cli.Title.Render(fmt.Sprintf("Engram indexing %s...", repoRoot)))
 
 	idx := indexer.New(store, registry, emb, cfg, repoRoot)
 	stats, err := idx.IndexAll(context.Background(), indexForce, indexVerbose)
@@ -95,7 +96,7 @@ func runIndex(cmd *cobra.Command, args []string) error {
 	}
 
 	// 9. Print summary
-	fmt.Fprintf(os.Stderr, "\nIndex complete:\n")
+	fmt.Fprintf(os.Stderr, "\n%s\n", cli.SuccessText.Render("Index complete:"))
 	fmt.Fprintf(os.Stderr, "  Files processed:     %d\n", stats.FilesProcessed)
 	fmt.Fprintf(os.Stderr, "  Files skipped:       %d\n", stats.FilesSkipped)
 	fmt.Fprintf(os.Stderr, "  Symbols extracted:   %d\n", stats.SymbolsExtracted)

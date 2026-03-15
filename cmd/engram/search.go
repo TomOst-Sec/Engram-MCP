@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/TomOst-Sec/colony-project/internal/cli"
 	"github.com/spf13/cobra"
 )
 
@@ -71,7 +72,10 @@ func runSearch(cmd *cobra.Command, args []string) error {
 		if count > 0 {
 			fmt.Fprintln(os.Stdout)
 		}
-		fmt.Fprintf(os.Stdout, "  %s:%d  %s  %s\n", filePath, startLine, symbolName, symbolType)
+		fmt.Fprintf(os.Stdout, "  %s  %s  %s\n",
+			cli.FilePath.Render(fmt.Sprintf("%s:%d", filePath, startLine)),
+			cli.SymbolName.Render(symbolName),
+			cli.Label.Render(symbolType))
 		if signature != "" {
 			fmt.Fprintf(os.Stdout, "  %s\n", signature)
 		}
@@ -82,6 +86,6 @@ func runSearch(cmd *cobra.Command, args []string) error {
 	}
 
 	elapsed := time.Since(start)
-	fmt.Fprintf(os.Stdout, "\nFound %d results for %q (%.1fms)\n", count, query, float64(elapsed.Microseconds())/1000.0)
+	fmt.Fprintf(os.Stdout, "\n%s\n", cli.Label.Render(fmt.Sprintf("Found %d results for %q (%.1fms)", count, query, float64(elapsed.Microseconds())/1000.0)))
 	return nil
 }
