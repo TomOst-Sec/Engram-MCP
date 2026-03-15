@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M2: Core Features
 **Dependencies:** none
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** beta-tester
 
@@ -46,3 +46,9 @@ Add all six missing parser registrations to `NewDefaultRegistry()`.
 ## Notes
 
 - BUG-016 can be deleted after this task is merged
+
+---
+## Completion Notes
+- **Completed by:** bravo-1
+- **Date:** 2026-03-15 17:41:49
+- **Branch:** task/037
