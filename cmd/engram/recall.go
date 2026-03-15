@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/TomOst-Sec/colony-project/internal/cli"
 	"github.com/spf13/cobra"
 )
 
@@ -72,7 +73,10 @@ func runRecall(cmd *cobra.Command, args []string) error {
 		if count > 0 {
 			fmt.Fprintln(os.Stdout)
 		}
-		fmt.Fprintf(os.Stdout, "  #%d  [%s]  %s\n", id, memType, createdAt)
+		fmt.Fprintf(os.Stdout, "  %s  %s  %s\n",
+			cli.Value.Render(fmt.Sprintf("#%d", id)),
+			cli.Subtitle.Render(fmt.Sprintf("[%s]", memType)),
+			cli.Label.Render(createdAt))
 		lines := strings.SplitN(content, "\n", 2)
 		fmt.Fprintf(os.Stdout, "  %s\n", lines[0])
 		if tags != nil && *tags != "" {
@@ -88,6 +92,6 @@ func runRecall(cmd *cobra.Command, args []string) error {
 	}
 
 	elapsed := time.Since(start)
-	fmt.Fprintf(os.Stdout, "\nFound %d memories for %q (%.1fms)\n", count, query, float64(elapsed.Microseconds())/1000.0)
+	fmt.Fprintf(os.Stdout, "\n%s\n", cli.Label.Render(fmt.Sprintf("Found %d memories for %q (%.1fms)", count, query, float64(elapsed.Microseconds())/1000.0)))
 	return nil
 }

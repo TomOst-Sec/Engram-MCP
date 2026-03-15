@@ -5,6 +5,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/TomOst-Sec/colony-project/internal/cli"
 	"github.com/spf13/cobra"
 )
 
@@ -34,9 +35,9 @@ func runStatus(cmd *cobra.Command, args []string) error {
 		dbSize = "unknown"
 	}
 
-	fmt.Fprintf(os.Stdout, "Engram v%s\n", version)
-	fmt.Fprintf(os.Stdout, "Repository: %s\n", repoRoot)
-	fmt.Fprintf(os.Stdout, "Database:   %s (%s)\n\n", dbPath, dbSize)
+	fmt.Fprintln(os.Stdout, cli.Title.Render(fmt.Sprintf("Engram v%s", version)))
+	fmt.Fprintf(os.Stdout, "%s %s\n", cli.Label.Render("Repository:"), repoRoot)
+	fmt.Fprintf(os.Stdout, "%s %s (%s)\n\n", cli.Label.Render("Database:  "), dbPath, dbSize)
 
 	var fileCount, symbolCount int
 	row := db.QueryRow("SELECT COUNT(DISTINCT file_path), COUNT(*) FROM code_index")
@@ -70,7 +71,7 @@ func runStatus(cmd *cobra.Command, args []string) error {
 	row = db.QueryRow("SELECT MAX(updated_at) FROM code_index")
 	row.Scan(&lastIndexed)
 
-	fmt.Fprintln(os.Stdout, "Index:")
+	fmt.Fprintln(os.Stdout, cli.Subtitle.Render("Index:"))
 	fmt.Fprintf(os.Stdout, "  Files indexed:    %d\n", fileCount)
 	fmt.Fprintf(os.Stdout, "  Symbols:          %d\n", symbolCount)
 
@@ -96,7 +97,7 @@ func runStatus(cmd *cobra.Command, args []string) error {
 		memoryCount = 0
 	}
 
-	fmt.Fprintf(os.Stdout, "\nMemories:\n")
+	fmt.Fprintf(os.Stdout, "\n%s\n", cli.Subtitle.Render("Memories:"))
 	fmt.Fprintf(os.Stdout, "  Total:            %d\n", memoryCount)
 
 	if memoryCount > 0 {
