@@ -16,6 +16,7 @@ func newRootCmd() *cobra.Command {
 		Version: version,
 	}
 	cmd.SetVersionTemplate(fmt.Sprintf("engram v%s\n", version))
+	cmd.AddCommand(newServeCmd())
 	return cmd
 }
 
