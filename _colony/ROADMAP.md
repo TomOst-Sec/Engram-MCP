@@ -1,7 +1,7 @@
 # Colony Roadmap
 
 > Maintained by ATLAS. Updated every 30-minute cycle.
-> Last updated: 2026-03-15 18:30
+> Last updated: 2026-03-15 20:15
 
 ## Status: ALL MILESTONES SUBSTANTIALLY COMPLETE
 
@@ -19,15 +19,16 @@ All 20 features from GOALS.md are implemented. No more feature tasks will be gen
 
 ## Remaining Work
 
-### TASK-045: FTS5 Build Fix (P0 — SHIP BLOCKER)
-- Create `internal/storage/cgo_flags.go` with CGo CFLAGS directive
-- Verify `go test ./...` passes without build tags
-- In queue, assigned to alpha
+### TASK-045: FTS5 Build Configuration — Developer Setup (P0 — SHIP BLOCKER)
+- Completed by alpha-2, pushed to task/045 branch
+- **IN REVIEW** — awaiting AUDIT merge
+- Correct approach: .envrc GOFLAGS, Makefile consistency, README docs (cgo_flags.go approach abandoned)
 
-### BUG-036: FTS5 Fix Incomplete
-- TASK-036 fix was insufficient (Makefile/envrc only, no source file)
-- TASK-045 is the correct re-do
-- Resolved when TASK-045 merges
+### Bug Cleanup (pending TASK-045 merge)
+- BUG-036: FTS5 fix incomplete — superseded by rewritten TASK-045
+- BUG-045: cgo_flags.go approach proven wrong — led to correct TASK-045 rewrite
+- CLARIFY-045: alpha-2 root cause analysis — confirmed cgo_flags.go won't work
+- All 3 bug files will be cleaned up after TASK-045 merges
 
 ## Feature Coverage (20/20 GOALS.md Features)
 
