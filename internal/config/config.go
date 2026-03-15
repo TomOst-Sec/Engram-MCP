@@ -31,9 +31,18 @@ type Config struct {
 	OllamaModel        string `json:"ollama_model"`
 	EmbeddingBatchSize int    `json:"embedding_batch_size"`
 
+	// Multi-repo
+	AdditionalRepos []RepoRef `json:"additional_repos"`
+
 	// Derived (not in JSON)
 	RepoRoot string `json:"-"`
 	RepoHash string `json:"-"`
+}
+
+// RepoRef references an additional repository for multi-repo support.
+type RepoRef struct {
+	Path string `json:"path"` // relative or absolute path
+	Name string `json:"name"` // display name for search results
 }
 
 // Load loads configuration with precedence: env vars > engram.json > defaults.
@@ -145,6 +154,9 @@ func applyRawOverrides(cfg *Config, raw map[string]json.RawMessage) {
 	}
 	if v, ok := raw["embedding_batch_size"]; ok {
 		json.Unmarshal(v, &cfg.EmbeddingBatchSize)
+	}
+	if v, ok := raw["additional_repos"]; ok {
+		json.Unmarshal(v, &cfg.AdditionalRepos)
 	}
 }
 
