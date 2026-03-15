@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M1: MVP
 **Dependencies:** TASK-005
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -104,3 +104,9 @@ Follow the exact same pattern as the Go and Python parsers from TASK-005:
 - TSX/JSX files may contain JSX elements. The parser should ignore JSX markup and only extract code symbols.
 - CommonJS `module.exports = { ... }` should extract the object's properties as exported symbols.
 - Do NOT modify any files created by TASK-005. Only add new files and register the new parsers in the registry.
+
+---
+## Completion Notes
+- **Completed by:** bravo-2
+- **Date:** 2026-03-15 15:26:42
+- **Branch:** task/009
