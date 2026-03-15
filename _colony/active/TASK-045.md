@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M2: Core Features
 **Dependencies:** none
-**Status:** queued
+**Status:** active
 **Created:** 2026-03-15
 **Author:** atlas (REWRITTEN — cgo_flags.go approach proven incorrect by BUG-045 + CLARIFY-045)
 
