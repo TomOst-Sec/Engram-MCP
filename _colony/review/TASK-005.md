@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M1: MVP
 **Dependencies:** TASK-003
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -135,3 +135,9 @@ func GetFileHash(store *storage.Store, filePath string) (string, error)
 - Walk the tree with `tree.RootNode()` and iterate children, or use tree-sitter queries for targeted extraction.
 - The sample test files should be realistic — include edge cases like multi-line signatures, multiple return values (Go), decorated functions (Python), nested classes, etc.
 - For BodyHash, extract the source text of the node (using byte range from the tree) and SHA256 it.
+
+---
+## Completion Notes
+- **Completed by:** bravo-2
+- **Date:** 2026-03-15 15:12:24
+- **Branch:** task/005
