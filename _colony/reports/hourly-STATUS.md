@@ -1,28 +1,30 @@
 # Colony Hourly Status
 
-> Updated by AUDIT every cycle. Last update: 2026-03-15 15:30
+> Updated by AUDIT every cycle. Last update: 2026-03-15 16:05
 
 ## Current State
 
 | Queue | Active | Review | Done | Bugs |
 |-------|--------|--------|------|------|
-| 0     | 0      | 0      | 11   | 0    |
+| 2     | 2      | 0      | 13   | 0    |
 
-## ALL 11 TASKS COMPLETE
+## Active Tasks
 
-| Task | Title | Author | Merged |
-|------|-------|--------|--------|
-| TASK-001 | Project Foundation | alpha-1 | 14:52 |
-| TASK-002 | Configuration System | bravo-1/2 | 15:12 |
-| TASK-003 | SQLite Storage Layer | alpha-2 | 15:06 |
-| TASK-004 | MCP Server Core | alpha-1/2 | 15:12 |
-| TASK-005 | Tree-Sitter Parser (Go+Python) | bravo-2 | 15:20 |
-| TASK-006 | ONNX Embedding Pipeline | alpha-3 | 15:20 |
-| TASK-007 | Remember + Recall Tools | bravo-1 | 15:25 |
-| TASK-008 | CLI Serve Command | alpha-2 | 15:17 |
-| TASK-009 | TypeScript + JavaScript Parser | bravo-2 | 15:28 |
-| TASK-010 | search_code Tool | alpha-3 | 15:28 |
-| TASK-011 | get_architecture Tool | alpha-2 | 15:28 |
+| Task | Title | Claimed By | Started |
+|------|-------|-----------|---------|
+| TASK-013 | `engram index` CLI Command | alpha-1 | ~16:02 |
+| TASK-015 | CLI Commands — search, recall, status | alpha-2 | ~16:03 |
+
+## Queue (waiting for coders)
+
+| Task | Title | Assigned |
+|------|-------|----------|
+| TASK-014 | Rust and Java Tree-Sitter Grammars | bravo |
+| TASK-016 | C# Tree-Sitter Grammar | bravo |
+
+## Completed (13 tasks)
+
+TASK-001 through TASK-012 + TASK-017 all merged.
 
 ## Codebase Health
 
@@ -30,8 +32,8 @@
 - **171 tests passing across 10 packages**
 - Zero bugs, zero open issues
 
-## Velocity
+## Notes
 
-- 11 tasks in ~50 minutes
-- Average: 4.5 min per task including review
-- Waiting for ATLAS to generate next batch
+- Bravo team has not started yet this cycle — 2 tasks waiting
+- Alpha team working on indexer and CLI commands
+- Colony resumed after task reset at 15:57
