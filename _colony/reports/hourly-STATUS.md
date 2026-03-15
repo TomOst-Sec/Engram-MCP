@@ -1,56 +1,57 @@
 # Colony Hourly Status
 
-> Updated by AUDIT every cycle. Last update: 2026-03-15 15:08
+> Updated by AUDIT every cycle. Last update: 2026-03-15 15:20
 
 ## Current State
 
 | Queue | Active | Review | Done | Bugs |
 |-------|--------|--------|------|------|
-| 8     | 2      | 0      | 2    | 2    |
+| 3     | 1      | 0      | 7    | 0    |
 
-## Active Tasks
-
-| Task | Title | Assigned | Instance | Since |
-|------|-------|----------|----------|-------|
-| TASK-005 | ? | bravo | bravo-2 | ~15:05 |
-| TASK-006 | ? | alpha | alpha-3 | ~15:05 |
-
-## Recently Completed
+## Completed (All Time)
 
 | Task | Title | Author | Merged |
 |------|-------|--------|--------|
-| TASK-001 | Project Foundation | alpha-1 | 14:52 (bootstrap) |
+| TASK-001 | Project Foundation | alpha-1 | 14:52 |
+| TASK-002 | Configuration System | bravo-1/2 | 15:12 |
 | TASK-003 | SQLite Storage Layer | alpha-2 | 15:06 |
+| TASK-004 | MCP Server Core | alpha-1/2 | 15:12 |
+| TASK-005 | Tree-Sitter Parser (Go+Python) | bravo-2 | 15:20 |
+| TASK-006 | ONNX Embedding Pipeline | alpha-3 | 15:20 |
+| TASK-008 | CLI Serve Command | alpha-2 | 15:17 |
 
-## Recently Rejected
+## Active
 
-| Task | Title | Reason |
-|------|-------|--------|
-| TASK-002 | Configuration System | Missing ALL required tests (0 of 8) |
-| TASK-004 | MCP Server Core | Code approved, merge conflict — needs rebase |
+| Task | Title | Instance |
+|------|-------|----------|
+| TASK-007 | ? | ? |
 
 ## Queue
 
-TASK-002 (requeued), TASK-004 (requeued), TASK-005, TASK-007, TASK-008, TASK-009, TASK-010, TASK-011
+TASK-009, TASK-010, TASK-011
 
 ## Codebase Health
 
 - Build: PASS
-- Tests: 12/12 passing (2 cmd/engram + 10 internal/storage)
-- Packages with tests: 2 of 7
-- Bugs: 2 (BUG-002: missing tests, BUG-004: trivial rebase needed)
+- Full test suite: ALL PASS across 6 packages
+  - cmd/engram: 8 tests
+  - internal/config: 9 tests
+  - internal/embeddings: 40 tests (1 skip)
+  - internal/mcp: 7 tests
+  - internal/parser: 25 tests
+  - internal/storage: 10 tests
+- **Total: ~99 tests passing**
+- Bugs: 0
 
-## Velocity
+## Velocity (40 min)
 
-- Reviewed: 3 tasks this cycle
-- Merged: 1 (TASK-003)
-- Rejected: 2 (TASK-002 quality, TASK-004 conflict)
-- Colony uptime: ~28 minutes
+- Tasks merged: 7
+- Average: 1 task every 5.7 minutes
+- Rejection rate: decreasing (coders learning to rebase)
+- Colony throughput: excellent
 
 ## Notes
 
-- ATLAS generated TASK-008 through TASK-011 at ~15:04
-- bravo-1 picked up TASK-002 (re-claimed after rejection)
-- bravo-2 moved to TASK-005
-- alpha-3 working on TASK-006
-- TASK-004 rejection is trivial — just needs rebase on main after TASK-003 merge
+- Milestone 1 foundation is nearly complete
+- All core packages implemented: config, storage, mcp, parser, embeddings, CLI
+- Only `internal/tools` has no tests yet (expected — tool implementations are upcoming tasks)
