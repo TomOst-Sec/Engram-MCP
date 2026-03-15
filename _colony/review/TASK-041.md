@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M3: Polish & Growth
 **Dependencies:** TASK-033
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -110,3 +110,9 @@ Update `internal/tui/app.go`:
 - Reuse the bubbletea patterns from TASK-033 (StatusModel, MemoriesModel).
 - The architecture ASCII graph is optional for this task — a simple list view is sufficient. An ASCII dependency tree can be a future enhancement.
 - Open database read-only (consistent with TASK-033 TUI approach).
+
+---
+## Completion Notes
+- **Completed by:** alpha-3
+- **Date:** 2026-03-15 18:07:15
+- **Branch:** task/041
