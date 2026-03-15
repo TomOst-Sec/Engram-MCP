@@ -4,7 +4,8 @@
 
 1. Install Engram:
    ```bash
-   go install github.com/TomOst-Sec/colony-project/cmd/engram@latest
+   git clone https://github.com/TomOst-Sec/colony-project.git && cd colony-project && make build
+   # Copy bin/engram to your PATH
    ```
 
 2. Index your project:
@@ -22,23 +23,36 @@
 
 ## What Claude Code Gets
 
-- **search_code** — Claude can search your codebase semantically
-- **remember** — Claude stores decisions and learnings for future sessions
-- **recall** — Claude remembers what happened in past sessions
-- **get_architecture** — Claude understands your project's structure
+- **search_code** — Semantic + keyword code search
+- **remember** — Store decisions and learnings for future sessions
+- **recall** — Retrieve memories from past sessions
+- **get_architecture** — Project module map and dependencies
+- **get_history** — Git blame context, hotspots, co-change patterns
+- **get_conventions** — Team coding patterns and conventions
+- **get_conventions_prompt** — Auto-injected convention context
+- **engram_status** — Server health and version info
 
 ## Verify
 
 ```bash
 claude mcp list
 ```
-You should see `engram` with 5 tools listed.
+You should see `engram` with 8 tools listed.
+
+## Watch Mode
+
+Keep the index fresh automatically while you work:
+```bash
+engram index --watch
+```
+
+This uses fsnotify to re-index changed files in <500ms -- no manual re-indexing needed.
 
 ## Re-indexing
 
-After significant code changes:
+For a manual full re-index:
 ```bash
 engram index
 ```
 
-Engram uses file hashes for incremental indexing — only changed files are re-processed.
+Engram uses file hashes for incremental indexing -- only changed files are re-processed. Use `--force` to rebuild everything.

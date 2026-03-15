@@ -8,7 +8,8 @@ GitHub Copilot's MCP support is evolving. Check the latest Copilot documentation
 
 1. Install Engram:
    ```bash
-   go install github.com/TomOst-Sec/colony-project/cmd/engram@latest
+   git clone https://github.com/TomOst-Sec/colony-project.git && cd colony-project && make build
+   # Copy bin/engram to your PATH
    ```
 
 2. Index your project:
@@ -40,12 +41,23 @@ gh copilot --mcp-server "engram serve"
 
 ## What Copilot Gets
 
-- **search_code** — Semantic code search across your codebase
+- **search_code** — Semantic + keyword code search
 - **remember** — Store decisions and learnings for future sessions
 - **recall** — Retrieve memories from past sessions
-- **get_architecture** — Project structure and module dependencies
-- **get_history** — Git history and change context
+- **get_architecture** — Project module map and dependencies
+- **get_history** — Git blame context, hotspots, co-change patterns
 - **get_conventions** — Team coding patterns and conventions
+- **get_conventions_prompt** — Auto-injected convention context
+- **engram_status** — Server health and version info
+
+## Watch Mode
+
+Keep the index fresh automatically while you work:
+```bash
+engram index --watch
+```
+
+This uses fsnotify to re-index changed files in <500ms -- no manual re-indexing needed.
 
 ## Notes
 
@@ -54,7 +66,9 @@ gh copilot --mcp-server "engram serve"
 
 ## Re-indexing
 
-After significant code changes:
+For a manual full re-index:
 ```bash
 engram index
 ```
+
+Use `--force` to rebuild everything.
