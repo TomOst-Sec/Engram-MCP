@@ -7,7 +7,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var version = "0.1.0-dev"
+var (
+	version = "0.1.0-dev"
+	commit  = "none"
+)
 
 func newRootCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -15,7 +18,7 @@ func newRootCmd() *cobra.Command {
 		Short:   "Engram — persistent, intelligent memory for AI coding agents",
 		Version: version,
 	}
-	cmd.SetVersionTemplate(fmt.Sprintf("engram v%s\n", version))
+	cmd.SetVersionTemplate(fmt.Sprintf("engram v%s (%s)\n", version, commit))
 	cmd.AddCommand(newServeCmd())
 	cmd.AddCommand(newIndexCmd())
 	cmd.AddCommand(newSearchCmd())
