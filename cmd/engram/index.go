@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/TomOst-Sec/colony-project/internal/cli"
 	"github.com/TomOst-Sec/colony-project/internal/config"
@@ -19,6 +21,7 @@ import (
 var (
 	indexForce   bool
 	indexVerbose bool
+	indexWatch   bool
 )
 
 func newIndexCmd() *cobra.Command {
@@ -30,6 +33,7 @@ func newIndexCmd() *cobra.Command {
 	}
 	cmd.Flags().BoolVar(&indexForce, "force", false, "Drop and rebuild the entire index")
 	cmd.Flags().BoolVarP(&indexVerbose, "verbose", "v", false, "Print each file as it's processed")
+	cmd.Flags().BoolVar(&indexWatch, "watch", false, "Watch for file changes and re-index automatically")
 	return cmd
 }
 
@@ -119,6 +123,18 @@ func runIndex(cmd *cobra.Command, args []string) error {
 		for _, e := range stats.Errors {
 			fmt.Fprintf(os.Stderr, "    - %s\n", e)
 		}
+	}
+
+	// 10. Start watcher if --watch flag is set
+	if indexWatch {
+		fmt.Fprintln(os.Stderr, "\nWatching for file changes (Ctrl+C to stop)...")
+		w := indexer.NewWatcher(idx, repoRoot, cfg)
+		ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+		defer stop()
+		if err := w.Start(ctx); err != nil && ctx.Err() == nil {
+			return fmt.Errorf("watcher failed: %w", err)
+		}
+		fmt.Fprintln(os.Stderr, "Watcher stopped.")
 	}
 
 	return nil
