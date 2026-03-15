@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M1: MVP
 **Dependencies:** TASK-012
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -267,3 +267,9 @@ After significant code changes, run `engram index` from the terminal. Cursor doe
 - Do NOT add badges, contribution guidelines, or changelog yet. Those are post-MVP concerns.
 - The docs directory may need a .gitkeep — or it won't if we're creating actual files.
 - Check that the MCP tool names (search_code, remember, recall, get_architecture, engram_status) match what's actually registered in the code. Read the tool definition files if uncertain.
+
+---
+## Completion Notes
+- **Completed by:** bravo-2
+- **Date:** 2026-03-15 15:55:28
+- **Branch:** task/017
