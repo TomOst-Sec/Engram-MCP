@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M1: MVP
 **Dependencies:** TASK-001
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -187,3 +187,9 @@ func (s *Store) DB() *sql.DB               // raw access for advanced queries
 - For FTS5 content sync, you'll need triggers to keep FTS in sync with the content tables. Add INSERT/DELETE/UPDATE triggers that mirror changes to the FTS tables.
 - Use `t.TempDir()` in tests for database paths — auto-cleaned up.
 - Do NOT add any CRUD helper methods beyond Open/Close/DB in this task. Those will come with the tools that need them (remember, recall, search, etc.).
+
+---
+## Completion Notes
+- **Completed by:** alpha-2
+- **Date:** 2026-03-15 15:02:30
+- **Branch:** task/003
