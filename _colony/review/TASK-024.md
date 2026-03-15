@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M2: Core Features
 **Dependencies:** TASK-019
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -123,3 +123,9 @@ This returns the same formatted text but as a tool response instead of a prompt 
 - The prompt should be concise — AI context windows are precious. Limit to the top 15 conventions by confidence.
 - Do NOT modify serve.go in this task. The prompt registration will be added when wiring up (or the tool will be auto-discovered if registered via conventions package).
 - If using the tool fallback approach, add it to the conventions package RegisterTools so it gets registered alongside get_conventions.
+
+---
+## Completion Notes
+- **Completed by:** alpha-2
+- **Date:** 2026-03-15 17:09:55
+- **Branch:** task/024
