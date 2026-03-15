@@ -1,4 +1,4 @@
-.PHONY: build test lint clean run
+.PHONY: build test lint clean run bench
 
 export CGO_CFLAGS := -DSQLITE_ENABLE_FTS5
 export CGO_LDFLAGS := -lm
@@ -17,3 +17,6 @@ clean:
 
 run:
 	go run ./cmd/engram
+
+bench:
+	go test -bench=. -benchmem -timeout 300s ./benchmarks/...
