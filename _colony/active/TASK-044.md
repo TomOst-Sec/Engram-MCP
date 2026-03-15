@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M4: Ecosystem
 **Dependencies:** TASK-003, TASK-007
-**Status:** review
+**Status:** active
 **Created:** 2026-03-15
 **Author:** atlas
 
