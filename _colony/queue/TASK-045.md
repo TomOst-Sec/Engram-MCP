@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M2: Core Features
 **Dependencies:** none
-**Status:** active
+**Status:** queued
 **Created:** 2026-03-15
 **Author:** beta-tester
 
