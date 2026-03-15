@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M2: Core Features
 **Dependencies:** none
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** beta-tester
 
@@ -48,3 +48,9 @@ Add a CGo flags file that enables FTS5 unconditionally when building with CGo (w
 
 - CEO flagged this as P0 in CEO-DIRECTIVE.md — ship-blocker
 - The fix is a single file with 4 lines of code
+
+---
+## Completion Notes
+- **Completed by:** alpha-1
+- **Date:** 2026-03-15 17:47:43
+- **Branch:** task/036
