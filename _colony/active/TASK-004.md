@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M1: MVP
 **Dependencies:** TASK-001
-**Status:** queued
+**Status:** active
 **Created:** 2026-03-15
 **Author:** atlas
 
