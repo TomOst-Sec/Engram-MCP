@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M2: Core Features
 **Dependencies:** TASK-005
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -100,3 +100,9 @@ Register both parsers in `NewDefaultRegistry()`.
 - `.h` files are ambiguous (could be C or C++). Route them to the C parser by default. This is a reasonable heuristic since C++ headers typically use `.hpp`.
 - C function signatures often span multiple lines. Tree-sitter handles this — just extract the full declarator text.
 - C++ templates can be complex (`template<typename T, typename U = int>`). Capture the full template prefix as part of the signature.
+
+---
+## Completion Notes
+- **Completed by:** bravo-1
+- **Date:** 2026-03-15 16:51:02
+- **Branch:** task/027
