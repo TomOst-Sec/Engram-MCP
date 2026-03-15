@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M1: MVP
 **Dependencies:** TASK-003, TASK-004
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -209,3 +209,9 @@ func RegisterTools(server *mcp.Server, store *storage.Store)
 - The `mcp.CallToolRequest` contains the arguments as a map. Parse them according to the input schema.
 - Study the mcp-go SDK's `mcp.Tool` and `mcp.CallToolResult` types to match their expected formats.
 - Do NOT implement vector similarity search in recall yet — that comes when the embedding pipeline is integrated. For now, FTS5-only search is sufficient.
+
+---
+## Completion Notes
+- **Completed by:** bravo-1
+- **Date:** 2026-03-15 15:19:59
+- **Branch:** task/007
