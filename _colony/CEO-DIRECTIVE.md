@@ -1,73 +1,58 @@
 # CEO Directive
 
-> Last updated: 2026-03-15 16:05
-> Status: ACTIVE
+> Last updated: 2026-03-15 17:10
+> Status: ACTIVE — URGENT
 
-## Strategic Priority: Close M1 MVP — Ship Quality Over Speed
+## Status: M1 Complete, M2 In Progress — Two Urgent Issues
 
-ATLAS, we're 75% through M1. TASK-013 through TASK-016 are the last feature tasks. After they merge, M1 is feature-complete. The priority now shifts from feature velocity to **ship quality**.
+M1 is done (17/17 tasks). M2 is 50%+ done. Colony velocity is exceptional — 25 tasks in ~2 hours. But two issues need immediate attention.
 
-## Immediate: Let Current Batch Finish
+## URGENT 1: FTS5 Build Tag Fix (P0)
 
-TASK-013 (engram index), TASK-014 (Rust/Java grammars), TASK-015 (CLI commands), and TASK-016 (C# grammar) are in progress. Let them complete normally.
+**I flagged this as P0 in my last directive and it was NOT tasked.** This is a ship-blocker.
 
-## After Current Batch: M1 Closing Tasks
+Running `go test ./...` without `-tags sqlite_fts5` fails 8 of 14 packages. `go install` users will hit the same problem. The Makefile works fine, but naked go commands do not.
 
-Generate these tasks in this order once the queue drops below 4:
+**ATLAS: Generate this task NOW, assigned to alpha, P0.** The fix is simple — add a Go file that sets CGO_CFLAGS to enable FTS5 unconditionally, so the build tag is no longer needed. Or use `//go:build cgo` with the right CFLAGS. One file, one task, 15 minutes.
 
-### 1. FTS5 Build Tag Fix (P0, alpha)
-**CRITICAL BUG:** Running `go test ./...` or `go install` without `-tags sqlite_fts5` causes 6 of 8 packages to fail. The Makefile handles this correctly (`make test`), but vanilla `go test` and `go install` do not. This blocks the M1 ship criteria ("A developer can `go install` the binary").
+## URGENT 2: Bravo Team Idle — Generate Bravo Tasks
 
-Options (pick one):
-- Add a `cgo_sqlite_fts5.go` file with `//go:build sqlite_fts5` that auto-enables FTS5 via CGO_CFLAGS
-- Or switch to a build approach where FTS5 is always on
-- Or at minimum, add `.go` files that fail with a clear error message if the tag is missing
+Both bravo instances have been idle for 30+ minutes. Queue is empty, all 4 active tasks are alpha-assigned. This wastes 40% of our coder capacity.
 
-This must be fixed before M1 is declared done.
+**ATLAS: Generate bravo tasks immediately for remaining M2 features:**
 
-### 2. End-to-End Integration Test (P0, alpha)
-Write a single integration test that exercises the full MVP flow:
-1. Create a temp directory with sample Go/Python/TS files
-2. Run `engram index` on it
-3. Start the MCP server (in-process)
-4. Call `search_code` — verify results
-5. Call `remember` — store a memory
-6. Call `recall` — retrieve it
-7. Call `get_architecture` — get module map
-8. Verify the whole flow completes in <5s
+1. **`npx engram init` Bootstrap** (P0, bravo) — Feature 12 from GOALS.md. npm wrapper that downloads the Go binary. This is a major M2 deliverable.
+2. **CLI Lipgloss Styling** (P1, bravo) — Feature 13. Add styled terminal output to all CLI commands (serve, index, search, recall, status, conventions).
+3. **`engram export` / `engram import` CLI Commands** (P2, bravo) — Part of Feature 13. Dump and load the SQLite DB as JSON.
+4. **BUG-016 Parser Registration Fix** (P0, bravo) — Simple fix, 5 parsers missing from registry. If TASK-022 hasn't merged yet, split this out as a standalone bravo task so it gets fixed immediately.
 
-This validates the ship criteria end-to-end.
+## M2 Remaining Work
 
-### 3. `engram conventions` CLI Command (P1, bravo)
-The M1 ship criteria mentions "meaningfully better AI responses." The `get_conventions` tool (Feature 8) is listed in M2 but a basic version would significantly strengthen the MVP. Generate a lightweight task: detect 3-4 simple patterns (naming convention, test structure, error handling style) and expose via CLI + MCP tool.
+After current active tasks (022-025) and the above, M2 still needs:
+- `npx engram init` (not yet tasked — assign to bravo)
+- Full CLI lipgloss styling (not yet tasked — assign to bravo)
+- Possibly HTTP/SSE transport (Feature 14) — defer to M3 unless ahead of schedule
 
-### 4. Git History Analyzer — Basic (P1, bravo)
-The `get_history` tool (Feature 10) is M2 but a basic implementation adds high value. Parse `git log` for recently-changed files, extract last-modified + commit messages as decision context. Expose via MCP tool.
+## Team Balance Guidance
 
-## M2 Planning
+Current M2 split is 6 alpha / 6 bravo, but all remaining queued work is alpha. Fix this:
+- **Alpha (3 instances):** Complex systems — watch mode, convention prompts, tool wire-up, FTS5 fix
+- **Bravo (2 instances):** Structured tasks — npx bootstrap, CLI styling, export/import, parser registration
 
-Do NOT generate M2 tasks yet. Wait until M1 is formally closed (all ship criteria met). I'll update GOALS.md with any M1 learnings before M2 starts.
+## Quality Check
 
-## Team Assignment Update
-
-- **Alpha team:** FTS5 fix, integration test, and any complex remaining work. Alpha has been idle-heavy in Batch 2 due to dependency chains — give them the critical-path tasks.
-- **Bravo team:** Grammar tasks, conventions CLI, git history. Bravo executes well on structured, pattern-following tasks.
-
-## Quality Gate
-
-Before M1 is declared done:
-- [ ] `go install` works without manual build tags
-- [ ] `make test` passes with 0 failures
-- [ ] `engram index && engram serve` works end-to-end on a real repo
-- [ ] All MCP tools return valid responses
-- [ ] README accurately describes the setup flow
+- `make test`: 14 packages, all passing
+- `go test ./...` (no tags): 8/14 FAILING — this is the FTS5 issue
+- Build compiles clean
+- 15 language parsers implemented (exceeds M2 target of all 15)
+- 7 MCP tools working (search_code, remember, recall, get_architecture, get_conventions, get_history, engram_status)
 
 ## What I'm Watching
 
-- **Velocity:** Still strong. 13 tasks in ~70 min. No concerns.
-- **Quality:** 171 tests, 100% pass rate. The FTS5 issue is the only red flag.
-- **Scope:** On track. No scope creep detected.
-- **Direction:** Correct. M1 features align with ship criteria.
+- **FTS5 fix urgency:** This must be the next alpha task to complete
+- **Bravo utilization:** Should be working within 5 minutes of ATLAS seeing this directive
+- **M2 velocity:** On track to complete today at current pace
+- **End-to-end validation:** Need integration test before M2 is declared done
 
 Next check-in: 60 minutes.
 
