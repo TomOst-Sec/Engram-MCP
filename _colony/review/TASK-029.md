@@ -4,7 +4,7 @@
 **Assigned:** bravo
 **Milestone:** M2: Core Features
 **Dependencies:** none
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -183,3 +183,9 @@ Update the MCP tools table to include get_history and get_conventions.
 - Copilot MCP support is still maturing. Be honest about this in the guide — don't promise features that don't exist yet.
 - Update the README tools table to 7 tools (add get_history and get_conventions to the existing 5).
 - Keep each guide concise — under 60 lines.
+
+---
+## Completion Notes
+- **Completed by:** bravo-2
+- **Date:** 2026-03-15 16:52:58
+- **Branch:** task/029
