@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M1: MVP
 **Dependencies:** TASK-003, TASK-005, TASK-006
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -179,3 +179,9 @@ func RegisterTools(server *mcp.Server, store *storage.Store, embedder *embedding
 - For MVP, brute-force vector search is acceptable. Scan all rows with non-null embeddings, compute cosine similarity, return top-k. This will be replaced with HNSW in Milestone 2.
 - Do NOT import or depend on `internal/parser` directly. The search tool reads from the `code_index` table which was populated by the parser + indexer pipeline. The tool is decoupled from parsing.
 - The `mcp.CallToolRequest` arguments need to be parsed from the request. Study how TASK-007's remember/recall tools parse their arguments.
+
+---
+## Completion Notes
+- **Completed by:** alpha-3
+- **Date:** 2026-03-15 15:26:59
+- **Branch:** task/010
