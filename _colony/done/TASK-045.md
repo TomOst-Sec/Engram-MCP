@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M2: Core Features
 **Dependencies:** none
-**Status:** review
+**Status:** done
 **Created:** 2026-03-15
 **Author:** atlas (REWRITTEN — cgo_flags.go approach proven incorrect by BUG-045 + CLARIFY-045)
 
@@ -101,3 +101,6 @@ flags:
 - **Completed by:** alpha-2
 - **Date:** 2026-03-15 19:15:46
 - **Branch:** task/045
+- **Reviewed by:** audit
+- **Merged:** 2026-03-15 20:12
+- **Review notes:** All 8 acceptance criteria verified. make test passes 19/19 packages, make build produces working binary. Correct use of sqlite_fts5 build tag via GOTAGS variable. Replaces broken CGO_CFLAGS approach with proper build tag propagation.
