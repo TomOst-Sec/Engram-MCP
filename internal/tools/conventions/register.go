@@ -9,4 +9,7 @@ import (
 func RegisterTools(server *engmcp.Server, store *storage.Store, repoRoot string) {
 	tool := NewConventionsTool(store, repoRoot)
 	server.RegisterTool(tool.Definition(), tool.Handle)
+
+	promptTool := NewConventionsPromptTool(store)
+	server.RegisterTool(promptTool.Definition(), promptTool.Handle)
 }
