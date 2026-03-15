@@ -4,7 +4,7 @@
 **Assigned:** alpha
 **Milestone:** M1: MVP
 **Dependencies:** TASK-003
-**Status:** active
+**Status:** review
 **Created:** 2026-03-15
 **Author:** atlas
 
@@ -153,3 +153,9 @@ If the ONNX model file is not found or ONNX Runtime fails to initialize:
 - For vector storage, use `encoding/binary` with `binary.LittleEndian` to convert float32 slices to/from byte slices. Each float32 is 4 bytes, so a 384-dim vector = 1536 bytes.
 - The brute-force search (scanning all vectors) is fine for repos < 10K symbols. HNSW indexing is a Milestone 2 feature.
 - ONNX Runtime requires the shared library to be available. Tests may need to `t.Skip` on systems where it's not installed. Design the test suite so that similarity tests (pure math) always run, and ONNX-dependent tests are conditional.
+
+---
+## Completion Notes
+- **Completed by:** alpha-3
+- **Date:** 2026-03-15 15:12:47
+- **Branch:** task/006
