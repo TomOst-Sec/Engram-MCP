@@ -1,7 +1,7 @@
 package storage
 
 // SchemaVersion is the current schema version.
-const SchemaVersion = 1
+const SchemaVersion = 3
 
 // schemaV1 contains all DDL statements for schema version 1.
 var schemaV1 = []string{
@@ -142,4 +142,51 @@ var indexesV1 = []string{
 	`CREATE INDEX IF NOT EXISTS idx_memories_type ON memories(type)`,
 	`CREATE INDEX IF NOT EXISTS idx_memories_session ON memories(session_id)`,
 	`CREATE INDEX IF NOT EXISTS idx_git_context_file ON git_context(file_path)`,
+}
+
+// schemaV2 adds the code_references table for tracking function calls,
+// pointer assignments, callback arguments, and dispatch table entries.
+var schemaV2 = []string{
+	`CREATE TABLE IF NOT EXISTS code_references (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		file_path TEXT NOT NULL,
+		to_name TEXT NOT NULL,
+		kind TEXT NOT NULL,
+		from_func TEXT NOT NULL,
+		line INTEGER NOT NULL,
+		context TEXT,
+		created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+	)`,
+	`CREATE INDEX IF NOT EXISTS idx_refs_to_name ON code_references(to_name)`,
+	`CREATE INDEX IF NOT EXISTS idx_refs_file ON code_references(file_path)`,
+	`CREATE INDEX IF NOT EXISTS idx_refs_kind ON code_references(kind)`,
+	`CREATE VIRTUAL TABLE IF NOT EXISTS code_references_fts USING fts5(
+		to_name, from_func, context,
+		content=code_references, content_rowid=id
+	)`,
+	`CREATE TRIGGER IF NOT EXISTS code_refs_ai AFTER INSERT ON code_references BEGIN
+		INSERT INTO code_references_fts(rowid, to_name, from_func, context)
+		VALUES (new.id, new.to_name, new.from_func, new.context);
+	END`,
+	`CREATE TRIGGER IF NOT EXISTS code_refs_ad AFTER DELETE ON code_references BEGIN
+		INSERT INTO code_references_fts(code_references_fts, rowid, to_name, from_func, context)
+		VALUES ('delete', old.id, old.to_name, old.from_func, old.context);
+	END`,
+}
+
+// schemaV3 adds param_name and table_name columns to code_references,
+// and a table_membership table for tracking which functions live in which dispatch tables.
+var schemaV3 = []string{
+	`ALTER TABLE code_references ADD COLUMN param_name TEXT`,
+	`ALTER TABLE code_references ADD COLUMN table_name TEXT`,
+	`CREATE TABLE IF NOT EXISTS table_membership (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		table_var TEXT NOT NULL,
+		func_name TEXT NOT NULL,
+		file_path TEXT NOT NULL,
+		slot_index INTEGER NOT NULL,
+		line INTEGER NOT NULL
+	)`,
+	`CREATE INDEX IF NOT EXISTS idx_tm_func ON table_membership(func_name)`,
+	`CREATE INDEX IF NOT EXISTS idx_tm_table ON table_membership(table_var)`,
 }

@@ -30,6 +30,7 @@ func newRootCmd() *cobra.Command {
 	cmd.AddCommand(newImportCmd())
 	cmd.AddCommand(newCIHookCmd())
 	cmd.AddCommand(newConventionsCmd())
+	cmd.AddCommand(newCallgraphCmd())
 	return cmd
 }
 

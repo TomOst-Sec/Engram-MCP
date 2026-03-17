@@ -21,6 +21,8 @@ func allMigrations() []migration {
 	v1Stmts = append(v1Stmts, indexesV1...)
 	return []migration{
 		{version: 1, statements: v1Stmts},
+		{version: 2, statements: schemaV2},
+		{version: 3, statements: schemaV3},
 	}
 }
 
